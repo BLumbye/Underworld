@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour {
     public static Inventory Instance;
 
     public int currency = 0;
-    public Relics relics;
+    [SerializeField] private List<Relic> relics;
 
     void Awake() {
         if (Instance == null) {
@@ -19,11 +19,15 @@ public class Inventory : MonoBehaviour {
         }
     }
 
-    [Flags]
-    public enum Relics {
-        None = 0,
-        DoubleJump = 1 << 0,
-        GrapplingHook = 1 << 1,
-        WallJump = 1 << 2,
+    public Relic GetRelic(string name) {
+        return relics.Find(r => r.name == name);
+    }
+
+    public bool HasRelic(string name) {
+        return GetRelic(name).owned;
+    }
+
+    public void GainAbility(string name) {
+        GetRelic(name).owned = true;
     }
 }

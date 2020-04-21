@@ -27,7 +27,7 @@
                     "id": "68fc4e03-4490-485d-9c66-8bc31c00f89a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": ""
                 },
                 {
                     "name": "Dash",
@@ -38,20 +38,12 @@
                     "interactions": "Press"
                 },
                 {
-                    "name": "Light Attack",
-                    "type": "Button",
-                    "id": "223f765c-4c87-4098-bb9c-029c9ced3608",
-                    "expectedControlType": "",
+                    "name": "Wall grab",
+                    "type": "PassThrough",
+                    "id": "e6659c1a-10d3-4052-8381-687159ce3c18",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press"
-                },
-                {
-                    "name": "Heavy Attack",
-                    "type": "Button",
-                    "id": "8544e69c-357b-4454-a3ce-1b4a56eb1992",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Press"
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -299,67 +291,23 @@
                 },
                 {
                     "name": "",
-                    "id": "b1ff9de3-3973-4926-9075-85acbdf7a622",
-                    "path": "<Mouse>/leftButton",
+                    "id": "af110191-54b2-4033-af4c-eea137aab68c",
+                    "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Light Attack",
+                    "action": "Wall grab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "998816f2-11f1-4ddb-9dc8-87cddae88430",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Light Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "89995982-1e4f-4a0c-9e64-89b0949e3c2e",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Light Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "37a99b83-c917-4591-be61-c298aa4e08d8",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Heavy Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f0a05419-0a46-40fe-b40f-4c79b9864d27",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Heavy Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "97843f34-1250-45ca-8ae8-e554afb2db3b",
+                    "id": "38d2ae2b-d8f8-4072-95d1-709d409ff817",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Heavy Attack",
+                    "action": "Wall grab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

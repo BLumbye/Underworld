@@ -16,9 +16,11 @@ GameObject:
   - component: {fileID: 7816769623769564336}
   - component: {fileID: 7816769623769564341}
   - component: {fileID: 172613302}
+  - component: {fileID: 7724397316721008091}
+  - component: {fileID: 172613310}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,12 +78,12 @@ SpriteRenderer:
   m_SortingLayerID: 796807421
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2b82bd7c195111e4b99ad3afdcbe8422, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f372bf9db98dea941b3f073f56f95ab3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5, y: 0.37}
+  m_Size: {x: 1.25, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -100,18 +102,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1894238}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.125, y: 2.3125}
-    newSize: {x: 0.5, y: 0.37}
+    oldSize: {x: 0.875, y: 1.25}
+    newSize: {x: 1.25, y: 1.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.8258638}
+  m_Size: {x: 0.875, y: 1.25}
   m_EdgeRadius: 0
 --- !u!114 &7816769623769564339
 MonoBehaviour:
@@ -240,6 +242,7 @@ MonoBehaviour:
   accelerationTimeAirborne: 0.2
   moveSpeed: 6
   coyoteTime: 0.1
+  jumpBufferTime: 0.1
   wallJumpClimp: {x: 7.5, y: 16}
   wallJumpOff: {x: 8.5, y: 7}
   wallLeap: {x: 18, y: 17}
@@ -277,22 +280,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.85
+  m_FalloffIntensity: 0.95
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 0.2
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 000000007b4e678933d04221fd507e2f
+  m_ApplyToSortingLayers: 000000007b4e678933d04221fd507e2f9b2f0424
   m_LightCookieSprite: {fileID: 0}
-  m_UseNormalMap: 0
+  m_UseNormalMap: 1
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0
+  m_ShadowIntensity: 0.2
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 1.2
-  m_PointLightOuterRadius: 7
-  m_PointLightDistance: 3
+  m_PointLightInnerRadius: 0.7
+  m_PointLightOuterRadius: 3
+  m_PointLightDistance: 1
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
@@ -304,3 +307,48 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &7724397316721008091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7816769623769564366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf08e6c3e9b2b5a4aa60ae69bfdcb7b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currency: 0
+  relics:
+  - {fileID: 11400000, guid: fe12ac6886223ba45876d4ea60b5a87a, type: 2}
+  - {fileID: 11400000, guid: aa27e83b4445c3641a106b22a95b0b5b, type: 2}
+  - {fileID: 11400000, guid: 5ee3157431ca35b4e96720ae6ccdcd30, type: 2}
+  - {fileID: 11400000, guid: 69a6723b155e1b74fbb902e07f00130b, type: 2}
+  - {fileID: 11400000, guid: a775c5ff125672546a7b4484ead9e666, type: 2}
+--- !u!114 &172613310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7816769623769564366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 000000007b4e678933d04221fd507e2f9b2f0424
+  m_ShapePath:
+  - {x: -0.4375, y: -0.625, z: 0}
+  - {x: 0.4375, y: -0.625, z: 0}
+  - {x: 0.4375, y: 0.625, z: 0}
+  - {x: -0.4353342, y: 0.625, z: 0}
+  m_ShapePathHash: -1993666251
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 16748
