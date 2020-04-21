@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Rocket Boots
   description: Unlocks Double Jump ability.
   icon: {fileID: 0}
-  owned: 0
+  owned: 1

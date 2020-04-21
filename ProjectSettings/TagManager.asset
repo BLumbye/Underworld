@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Grapple point
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Player
   - Ground
   - Particles
-  - 
+  - Grapple points
   - 
   - 
   - 
@@ -49,6 +50,12 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 796807421
+    locked: 0
+  - name: Enemies
+    uniqueID: 2074170617
+    locked: 0
+  - name: Foreground
+    uniqueID: 3189424971
     locked: 0
   - name: Particles
     uniqueID: 604254107

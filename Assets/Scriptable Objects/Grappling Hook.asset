@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Grappling Hook
   description: Unlocks Grappling Hook ability.
   icon: {fileID: 0}
-  owned: 0
+  owned: 1

@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Boosted Rocket Boots
   description: Unlocks Dash ability.
   icon: {fileID: 0}
-  owned: 0
+  owned: 1

@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System;
+using Cinemachine;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -43,6 +44,18 @@ public class Player : MonoBehaviour {
     [Tooltip("The force, in the y-direction, that is applied when jump up against wall whilst climbing."), Min(0f)]
     [SerializeField] private float wallClimbJumpForce = 10f;
 
+    [Header("Dash")]
+    [SerializeField] private float dashLength = 3;
+    [SerializeField] private float dashTime = 0.3f;
+    [SerializeField] private float dashCooldown = 0.1f;
+
+    [Header("Grappling Hook")]
+    [SerializeField] private float grappleRange = 10f;
+    [SerializeField] private LayerMask grapplePointLayer;
+    [SerializeField] private GameObject grappleCrosshair;
+    [SerializeField] private LineRenderer grappleLine;
+
+
     // Coyote variables
     private float coyoteJumpTime = -1f;
     private float coyoteWallslideTime = -1f;
@@ -66,10 +79,23 @@ public class Player : MonoBehaviour {
     private int wallDirX;
     private bool wallSliding = false;
     private bool wallGrabbing = false;
-    private float wallJumpTime = -1f;
+    private float wallJumpTimestamp = -1f;
     private int wallJumpDir;
-    private float wallClimbJumpTime = -1f;
+    private float wallClimbJumpTimestamp = -1f;
     private float wallClimbJumpDuration;
+
+    // Dash variables
+    private float dashVelocity;
+    private float dashStartedTimestamp = -1f;
+    private float dashFinishedTimestamp = -1f;
+    private bool dashed = false;
+    private bool dashing = false;
+    private int dashingDirection;
+
+    // Grapple variables
+    private Transform grappleTarget;
+    private Transform currentGrapplePoint;
+    private bool grappling;
 
     // References
     private Controller2D controller;
@@ -84,8 +110,8 @@ public class Player : MonoBehaviour {
     private bool wallClimbPressed = false;
 
     // Computed variables
-    private bool wallJumping { get => wallJumpTime + wallJumpReturnDelay > Time.time; }
-    private bool wallClimbJumping { get => wallClimbJumpTime + wallClimbJumpDuration > Time.time; }
+    private bool wallJumping { get => wallJumpTimestamp + wallJumpReturnDelay > Time.time; }
+    private bool wallClimbJumping { get => wallClimbJumpTimestamp + wallClimbJumpDuration > Time.time; }
 
     // Start is called before the first frame update
     void Start() {
@@ -102,6 +128,9 @@ public class Player : MonoBehaviour {
 
         // Calculate wall climb jump duration
         wallClimbJumpDuration = (wallClimbJumpForce - wallClimbSpeed) / gravity;
+
+        // Calculate dash velocity
+        dashVelocity = dashLength / dashTime;
     }
 
     // Update is called once per frame
@@ -110,6 +139,8 @@ public class Player : MonoBehaviour {
         HandleWallSliding();
         HandleWallGrabbing();
         HandleFlipping();
+        HandleDashing();
+        HandleGrappling();
 
         // Jump from the jump buffer
         if (jumpPressedTime + jumpBufferTime > Time.time && controller.collisions.below) {
@@ -133,8 +164,10 @@ public class Player : MonoBehaviour {
         if (jumping && velocity.y <= 0)
             jumping = false;
 
-        if (controller.collisions.below)
+        if (controller.collisions.below) {
+            dashed = false;
             doubleJumped = false;
+        }
 
         HandleAnimations();
         HandleCoyoteTimers();
@@ -220,6 +253,68 @@ public class Player : MonoBehaviour {
         }
     }
 
+    void HandleDashing() {
+        if (!dashing)
+            return;
+
+        velocity.y = 0;
+        velocity.x = dashVelocity * dashingDirection;
+
+        wallDirX = controller.collisions.left ? -1 : 1;
+        if (dashStartedTimestamp + dashTime <= Time.time ||
+            (controller.collisions.left || controller.collisions.right) && wallDirX == dashingDirection) {
+            dashing = false;
+            dashFinishedTimestamp = Time.time;
+        }
+    }
+
+    void HandleGrappling() {
+        if (!inventory.HasRelic("Grappling Hook"))
+            return;
+
+        // Target the closest grapple point that's in front and above the player
+        Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, grappleRange, grapplePointLayer);
+        Collider2D closestPoint = null;
+        float closestDistance = Mathf.Infinity;
+        foreach (Collider2D point in hit) {
+            // Check if the point is in the in front and above the player
+            if (point.transform.position.y > transform.position.y &&
+                Math.Sign(point.transform.position.x - transform.position.x) == controller.collisions.faceDir &&
+                point.transform != currentGrapplePoint) {
+                float distance = Vector2.Distance(point.transform.position, transform.position);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestPoint = point;
+                }
+            }
+        }
+
+        if (closestPoint == null && grappleTarget != null) {
+            // Hide the crosshair
+            grappleCrosshair.SetActive(false);
+            grappleTarget = null;
+        } else if (closestPoint != grappleTarget) {
+            // Show crosshair
+            grappleCrosshair.transform.position = closestPoint.transform.position;
+            grappleCrosshair.SetActive(true);
+
+            grappleTarget = closestPoint.transform;
+        }
+
+        if (grappling) {
+            if (Vector2.Distance(currentGrapplePoint.position, transform.position) > grappleRange) {
+                grappling = false;
+                grappleLine.enabled = false;
+                currentGrapplePoint = null;
+                return;
+            }
+
+            grappleLine.SetPositions(new Vector3[] {
+                transform.position, currentGrapplePoint.position
+            });
+        }
+    }
+
     void Jump() {
         velocity.y = jumpPressed ? maxJumpVelocity : minJumpVelocity;
         jumping = true;
@@ -231,13 +326,38 @@ public class Player : MonoBehaviour {
 
         velocity.x = -wallDirX * wallJumpForce.x;
         velocity.y = wallJumpForce.y;
-        wallJumpTime = Time.time;
+        wallJumpTimestamp = Time.time;
         wallJumpDir = -wallDirX;
     }
 
     void WallClimbJump() {
         velocity.y = wallClimbJumpForce;
-        wallClimbJumpTime = Time.time;
+        wallClimbJumpTimestamp = Time.time;
+    }
+
+    void Dash() {
+        if (dashed || !inventory.HasRelic("Boosted Rocket Boots") || dashFinishedTimestamp + dashCooldown > Time.time)
+            return;
+
+        dashing = true;
+        dashed = true;
+        dashingDirection = controller.collisions.faceDir;
+        dashStartedTimestamp = Time.time;
+    }
+
+    void Grapple() {
+        if (!inventory.HasRelic("Grappling Hook"))
+            return;
+
+        if (grappleTarget) {
+            grappling = true;
+            grappleLine.enabled = true;
+            currentGrapplePoint = grappleTarget;
+        } else {
+            grappling = false;
+            grappleLine.enabled = false;
+            currentGrapplePoint = null;
+        }
     }
 
     public void OnJumpPressed() {
@@ -280,6 +400,20 @@ public class Player : MonoBehaviour {
         jumpPressed = ctx.ReadValue<float>() >= 0.5f;
         if (jumpPressed) OnJumpPressed();
         else OnJumpReleased();
+    }
+
+    public void OnDashInput(InputAction.CallbackContext ctx) {
+        if (!ctx.performed)
+            return;
+
+        Dash();
+    }
+
+    public void OnGrappleInput(InputAction.CallbackContext ctx) {
+        if (!ctx.performed)
+            return;
+
+        Grapple();
     }
 
     public void OnDownInput(InputAction.CallbackContext ctx) {
