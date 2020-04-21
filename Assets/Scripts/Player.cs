@@ -1,4 +1,5 @@
-﻿using NaughtyAttributes;
+﻿using Cinemachine;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -59,6 +60,7 @@ public class Player : MonoBehaviour {
     private float velocityXSmoothing;
     private float velocityYSmoothing;
     private bool jumping = false;
+    private bool doubleJumped = false;
 
     // Wall variables
     private int wallDirX;
@@ -130,6 +132,9 @@ public class Player : MonoBehaviour {
 
         if (jumping && velocity.y <= 0)
             jumping = false;
+
+        if (controller.collisions.below)
+            doubleJumped = false;
 
         HandleAnimations();
         HandleCoyoteTimers();
@@ -247,6 +252,9 @@ public class Player : MonoBehaviour {
             // Jump up the wall
             WallClimbJump();
         } else if (controller.collisions.below || coyoteJumpTime + coyoteTime > Time.time) {
+            Jump();
+        } else if (!doubleJumped && inventory.HasRelic("Rocket Boots")) {
+            doubleJumped = true;
             Jump();
         } else {
             jumpPressedTime = Time.time;
