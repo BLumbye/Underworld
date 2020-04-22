@@ -228,17 +228,7 @@ public class Player : MonoBehaviour {
     }
 
     void HandleAnimations() {
-        if (Mathf.Abs(velocity.x) > 0.5) animator.SetBool("Walking", true);
-        else animator.SetBool("Walking", false);
-
-        if (velocity.y > 0 && !wallSliding) animator.SetBool("Jumping", true);
-        else animator.SetBool("Jumping", false);
-
-        if (velocity.y < 0 && !wallSliding) animator.SetBool("Falling", true);
-        else animator.SetBool("Falling", false);
-
-        if (wallSliding) animator.SetBool("Wall Sliding", true);
-        else animator.SetBool("Wall Sliding", false);
+        
     }
 
     void HandleCoyoteTimers() {
