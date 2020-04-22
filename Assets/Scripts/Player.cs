@@ -54,6 +54,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private LayerMask grapplePointLayer;
     [SerializeField] private GameObject grappleCrosshair;
     [SerializeField] private LineRenderer grappleLine;
+    [SerializeField] private float grappleSpeed = 4f;
+    [SerializeField] private float shootTime = 0.3f;
 
 
     // Coyote variables
@@ -70,8 +72,7 @@ public class Player : MonoBehaviour {
     private float gravity;
     private float maxJumpVelocity;
     private float minJumpVelocity;
-    private float velocityXSmoothing;
-    private float velocityYSmoothing;
+    private Vector2 velocitySmoothing;
     private bool jumping = false;
     private bool doubleJumped = false;
 
@@ -96,6 +97,7 @@ public class Player : MonoBehaviour {
     private Transform grappleTarget;
     private Transform currentGrapplePoint;
     private bool grappling;
+    private float grappleExtendProgess = 0f;
 
     // References
     private Controller2D controller;
@@ -149,7 +151,7 @@ public class Player : MonoBehaviour {
 
         groundedBeforeMovement = controller.collisions.below;
 
-        controller.Move(velocity * Time.deltaTime);
+        if (!grappling) controller.Move(velocity * Time.deltaTime);
 
         // Reset velocity if ceiling or ground is hit
         if (controller.collisions.above || controller.collisions.below)
@@ -174,12 +176,16 @@ public class Player : MonoBehaviour {
     }
 
     void CalculateVelocity() {
+        // Don't do this is wall grabbing or grappling
+        if (wallGrabbing || grappling)
+            return;
+
         float targetVelocityX = directionalInput.x * moveSpeed;
         // If jumping off a wall then limit the movement towards the wall
         if (wallJumping && Mathf.Sign(targetVelocityX) != wallJumpDir)
             targetVelocityX = 0;
 
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, controller.collisions.below ? accelerationTimeGrounded : accelerationTimeAirborne);
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocitySmoothing.x, controller.collisions.below ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
     }
 
@@ -211,20 +217,16 @@ public class Player : MonoBehaviour {
             wallGrabbing = true;
             jumping = false;
 
-            // Reverse applied gravity
-            velocity.y -= gravity * Time.deltaTime;
-
             // Apply velocity from climbing
             float targetVelocityY = directionalInput.y * wallClimbSpeed;
             velocity.x = 0;
-            velocity.y = Mathf.SmoothDamp(velocity.y, targetVelocityY, ref velocityYSmoothing,
+            velocity.y = Mathf.SmoothDamp(velocity.y, targetVelocityY, ref velocitySmoothing.y,
                 accelerationTimeClimbing);
         }
     }
 
     void HandleFlipping() {
-        if (Mathf.Sign(transform.localScale.x) != controller.collisions.faceDir)
-            transform.localScale *= new Vector2(-1, 1);
+        sr.flipX = controller.collisions.faceDir == -1;
     }
 
     void HandleAnimations() {
@@ -271,8 +273,12 @@ public class Player : MonoBehaviour {
             if (point.transform.position.y > transform.position.y &&
                 Math.Sign(point.transform.position.x - transform.position.x) == controller.collisions.faceDir &&
                 point.transform != currentGrapplePoint) {
+                // Check line of sight
                 float distance = Vector2.Distance(point.transform.position, transform.position);
-                if (distance < closestDistance) {
+                RaycastHit2D lineHit = Physics2D.Raycast(transform.position, point.transform.position - transform.position,
+                    distance, controller.collisionMask);
+                
+                if (distance < closestDistance && !lineHit) {
                     closestDistance = distance;
                     closestPoint = point;
                 }
@@ -291,23 +297,45 @@ public class Player : MonoBehaviour {
             grappleTarget = closestPoint.transform;
         }
 
-        if (grappling) {
-            if (Vector2.Distance(currentGrapplePoint.position, transform.position) > grappleRange) {
-                grappling = false;
-                grappleLine.enabled = false;
-                currentGrapplePoint = null;
+        if (grappling && grappleExtendProgess < 1) {
+            grappleExtendProgess += Time.deltaTime / shootTime;
+            grappleLine.SetPositions(new Vector3[] {
+                transform.position, transform.position + (currentGrapplePoint.position - transform.position) * grappleExtendProgess
+            });
+        } else if (grappling) {
+            Vector2 ropeVector = currentGrapplePoint.position - transform.position;
+            float distance = ropeVector.magnitude;
+            if (distance > grappleRange) {
+                ResetGrapple();
                 return;
             }
 
             grappleLine.SetPositions(new Vector3[] {
                 transform.position, currentGrapplePoint.position
             });
+
+            // Apply gravity and calculate velocity
+            if (distance > 0.1) {
+                velocity.y += gravity * Time.deltaTime;
+                Vector2 perpendicular = Vector2.Perpendicular(currentGrapplePoint.position - transform.position);
+                velocity = Vector2.Dot(velocity, perpendicular) / perpendicular.sqrMagnitude * perpendicular;
+            } else {
+                velocity = Vector2.zero;
+                dashed = false;
+                doubleJumped = false;
+                if (Mathf.Abs(directionalInput.x) > 0.5)
+                    controller.collisions.faceDir = Math.Sign(directionalInput.x);
+            }
+
+            // Move - but if were very close, then just go straight to the point without velocity
+            controller.Move(distance < 0.1 ? ropeVector : velocity * Time.deltaTime + ropeVector.normalized * grappleSpeed * Time.deltaTime);
         }
     }
 
     void Jump() {
         velocity.y = jumpPressed ? maxJumpVelocity : minJumpVelocity;
         jumping = true;
+        ResetGrapple();
     }
 
     void WallJump() {
@@ -333,6 +361,7 @@ public class Player : MonoBehaviour {
         dashed = true;
         dashingDirection = controller.collisions.faceDir;
         dashStartedTimestamp = Time.time;
+        ResetGrapple();
     }
 
     void Grapple() {
@@ -340,14 +369,19 @@ public class Player : MonoBehaviour {
             return;
 
         if (grappleTarget) {
+            grappleExtendProgess = 0f;
             grappling = true;
             grappleLine.enabled = true;
             currentGrapplePoint = grappleTarget;
         } else {
-            grappling = false;
-            grappleLine.enabled = false;
-            currentGrapplePoint = null;
+            ResetGrapple();
         }
+    }
+
+    void ResetGrapple() {
+        grappling = false;
+        grappleLine.enabled = false;
+        currentGrapplePoint = null;
     }
 
     public void OnJumpPressed() {
