@@ -331,7 +331,7 @@ public class Player : MonoBehaviour {
             if (distance > 0.1) {
                 velocity.y += gravity * Time.deltaTime;
                 Vector2 perpendicular = Vector2.Perpendicular(currentGrapplePoint.position - transform.position);
-                velocity = Vector2.Dot(velocity, perpendicular) / perpendicular.sqrMagnitude * perpendicular;
+                velocity = Vector2.Dot(velocity, perpendicular) / perpendicular.sqrMagnitude * perpendicular * (1 - 0.9f * Time.deltaTime);
             } else {
                 velocity = Vector2.zero;
                 dashed = false;
