@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7816769623769564366
+--- !u!1 &1335410315066323426
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,44 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7816769623769564338}
-  - component: {fileID: 7816769623769564337}
-  - component: {fileID: 7816769623769564367}
-  - component: {fileID: 7816769623769564339}
-  - component: {fileID: 7816769623769564340}
-  - component: {fileID: 7816769623769564336}
-  - component: {fileID: 7816769623769564341}
-  - component: {fileID: 172613302}
-  - component: {fileID: 7724397316721008091}
-  - component: {fileID: 172613310}
+  - component: {fileID: 6903000208451715542}
+  - component: {fileID: 7446042091758207043}
+  - component: {fileID: 886047968248544944}
   m_Layer: 8
-  m_Name: Player
-  m_TagString: Player
+  m_Name: Sprite
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7816769623769564338
+--- !u!4 &6903000208451715542
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7816769623769564366}
+  m_GameObject: {fileID: 1335410315066323426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05, y: 0.45, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 7816769623769564338}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7816769623769564337
+--- !u!212 &7446042091758207043
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7816769623769564366}
+  m_GameObject: {fileID: 1335410315066323426}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -78,17 +71,75 @@ SpriteRenderer:
   m_SortingLayerID: 796807421
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f372bf9db98dea941b3f073f56f95ab3, type: 3}
+  m_Sprite: {fileID: -2491486009504315380, guid: f372bf9db98dea941b3f073f56f95ab3,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.25, y: 1.25}
+  m_Size: {x: 0.875, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &886047968248544944
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335410315066323426}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf9d9014e223ff047ba2b3df2e5a51d8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &7816769623769564366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7816769623769564338}
+  - component: {fileID: 7816769623769564367}
+  - component: {fileID: 7816769623769564339}
+  - component: {fileID: 7816769623769564340}
+  - component: {fileID: 7816769623769564336}
+  - component: {fileID: 172613302}
+  - component: {fileID: 7724397316721008091}
+  - component: {fileID: 172613310}
+  m_Layer: 8
+  m_Name: Player
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7816769623769564338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7816769623769564366}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6903000208451715542}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &7816769623769564367
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -102,12 +153,12 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.625}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 0.875, y: 1.25}
-    newSize: {x: 1.25, y: 1.25}
+    newSize: {x: 0.875, y: 1.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -187,17 +238,50 @@ MonoBehaviour:
     m_ActionId: 68fc4e03-4490-485d-9c66-8bc31c00f89a
     m_ActionName: Movement/Down[/Keyboard/s,/Keyboard/downArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7816769623769564336}
+        m_MethodName: OnDashInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c9a6751f-bc60-4229-b2f0-4b691aefb996
     m_ActionName: Movement/Dash[/Keyboard/leftShift,/Keyboard/rightShift,/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 223f765c-4c87-4098-bb9c-029c9ced3608
-    m_ActionName: Movement/Light Attack[/Mouse/leftButton]
+      m_Calls:
+      - m_Target: {fileID: 7816769623769564336}
+        m_MethodName: OnWallClimbInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e6659c1a-10d3-4052-8381-687159ce3c18
+    m_ActionName: Movement/Wall grab[/Keyboard/g]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8544e69c-357b-4454-a3ce-1b4a56eb1992
-    m_ActionName: Movement/Heavy Attack[/Mouse/rightButton]
+      m_Calls:
+      - m_Target: {fileID: 7816769623769564336}
+        m_MethodName: OnGrappleInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: af237bee-fbe7-4a42-84c8-b8bc97782bf3
+    m_ActionName: Movement/Grapple[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Movement
@@ -235,37 +319,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdba11f569229224ea32cbf31925ee5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJumpHeight: 4
-  minJumpHeight: 1
+  spriteObject: {fileID: 1335410315066323426}
+  maxJumpHeight: 3
+  minJumpHeight: 0.75
   jumpTime: 0.4
   accelerationTimeGrounded: 0.1
   accelerationTimeAirborne: 0.2
   moveSpeed: 6
   coyoteTime: 0.1
   jumpBufferTime: 0.1
-  wallJumpClimp: {x: 7.5, y: 16}
-  wallJumpOff: {x: 8.5, y: 7}
-  wallLeap: {x: 18, y: 17}
+  wallJumpForce: {x: 11, y: 13}
+  wallJumpReturnDelay: 0.2
   wallSlideSpeedMax: 3
---- !u!95 &7816769623769564341
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7816769623769564366}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf9d9014e223ff047ba2b3df2e5a51d8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  wallClimbSpeed: 4
+  accelerationTimeClimbing: 0.1
+  wallClimbJumpForce: 20
+  dashLength: 3.5
+  dashTime: 0.2
+  dashCooldown: 0.25
+  grappleRange: 15
+  grapplePointLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  grappleCrosshair: {fileID: 0}
+  grappleLine: {fileID: 0}
+  grappleSpeed: 10
+  shootTime: 0.2
 --- !u!114 &172613302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,16 +418,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShadowGroup: 0
-  m_HasRenderer: 1
+  m_HasRenderer: 0
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
-  m_SelfShadows: 1
-  m_ApplyToSortingLayers: 000000007b4e678933d04221fd507e2f9b2f0424
-  m_ShapePath:
-  - {x: -0.4375, y: -0.625, z: 0}
-  - {x: 0.4375, y: -0.625, z: 0}
-  - {x: 0.4375, y: 0.625, z: 0}
-  - {x: -0.4353342, y: 0.625, z: 0}
-  m_ShapePathHash: -1993666251
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 
+  m_ShapePath: []
+  m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 16748
+  m_InstanceId: 19184

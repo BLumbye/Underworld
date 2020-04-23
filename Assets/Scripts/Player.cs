@@ -4,8 +4,11 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Controller2D), typeof(SpriteRenderer), typeof(Animator))]
+[RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour {
+    [Header("General")]
+    [SerializeField] private GameObject spriteObject;
+
     [Header("Movement")]
     [Tooltip("The maximum jump height in units."), Min(0f)]
     [SerializeField] private float maxJumpHeight = 4;
@@ -119,8 +122,8 @@ public class Player : MonoBehaviour {
     void Start() {
         // Set references
         controller = GetComponent<Controller2D>();
-        sr = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        sr = spriteObject.GetComponent<SpriteRenderer>();
+        animator = spriteObject.GetComponent<Animator>();
         inventory = Inventory.Instance;
 
         // Calculate gravity and jump velocity
@@ -151,7 +154,7 @@ public class Player : MonoBehaviour {
 
         groundedBeforeMovement = controller.collisions.below;
 
-        if (!grappling) controller.Move(velocity * Time.deltaTime);
+        if (!(grappling && grappleExtendProgess >= 1)) controller.Move(velocity * Time.deltaTime);
 
         // Reset velocity if ceiling or ground is hit
         if (controller.collisions.above || controller.collisions.below)
@@ -177,7 +180,7 @@ public class Player : MonoBehaviour {
 
     void CalculateVelocity() {
         // Don't do this is wall grabbing or grappling
-        if (wallGrabbing || grappling)
+        if (wallGrabbing || (grappling && grappleExtendProgess >= 1))
             return;
 
         float targetVelocityX = directionalInput.x * moveSpeed;
@@ -230,7 +233,17 @@ public class Player : MonoBehaviour {
     }
 
     void HandleAnimations() {
-        
+        bool grounded = controller.collisions.below;
+        float walk_speed = Mathf.Abs(velocity.x) / moveSpeed;
+        bool running = grounded && walk_speed > 0.25f;
+        bool walking = grounded && walk_speed > 0.01f && !running;
+        bool idle = !walking && !running;
+
+        animator.SetBool("grounded", grounded);
+        animator.SetBool("walking", walking);
+        animator.SetBool("running", running);
+        animator.SetBool("idle", idle);
+        animator.SetFloat("walk_speed", walk_speed);
     }
 
     void HandleCoyoteTimers() {
@@ -269,9 +282,9 @@ public class Player : MonoBehaviour {
         Collider2D closestPoint = null;
         float closestDistance = Mathf.Infinity;
         foreach (Collider2D point in hit) {
-            // Check if the point is in the in front and above the player
-            if (point.transform.position.y > transform.position.y &&
-                Math.Sign(point.transform.position.x - transform.position.x) == controller.collisions.faceDir &&
+            // Check if the point is in the in front and above the player - with a margin of 2 units
+            if (point.transform.position.y + 2 > transform.position.y &&
+                (Math.Sign(point.transform.position.x - transform.position.x) == controller.collisions.faceDir || Mathf.Abs(point.transform.position.x - transform.position.x) <= 2) &&
                 point.transform != currentGrapplePoint) {
                 // Check line of sight
                 float distance = Vector2.Distance(point.transform.position, transform.position);
@@ -359,7 +372,7 @@ public class Player : MonoBehaviour {
 
         dashing = true;
         dashed = true;
-        dashingDirection = controller.collisions.faceDir;
+        dashingDirection = Math.Sign(directionalInput.x);
         dashStartedTimestamp = Time.time;
         ResetGrapple();
     }
