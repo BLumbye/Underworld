@@ -58,6 +58,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private float accelerationTimeClimbing = 0.1f;
     [Tooltip("The force, in the y-direction, that is applied when jump up against wall whilst climbing."), Min(0f)]
     [SerializeField] private float wallClimbJumpForce = 10f;
+    [SerializeField] private float wallClimbJumpCooldown = 0.3f;
 
     [Header("Dash")]
     [SerializeField] private float dashLength = 3;
@@ -72,6 +73,10 @@ public class Player : MonoBehaviour {
     [SerializeField] private float grappleSpeed = 4f;
     [SerializeField] private float shootTime = 0.3f;
     [SerializeField] private float hangingDistance = 0.6f;
+
+    [Header("Particles")]
+    [SerializeField] ParticleSystem jumpParticle;
+    [SerializeField] ParticleSystem wallSlideParticle;
     #endregion
 
     #region Private variables
@@ -168,7 +173,7 @@ public class Player : MonoBehaviour {
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
 
         // Calculate wall climb jump duration
-        wallClimbJumpDuration = (wallClimbJumpForce - wallClimbSpeed) / gravity;
+        wallClimbJumpDuration = (wallClimbJumpForce - wallClimbSpeed) / -gravity;
 
         // Calculate dash velocity
         dashVelocity = dashLength / dashTime;
@@ -209,9 +214,15 @@ public class Player : MonoBehaviour {
         if (jumping && velocity.y <= 0)
             jumping = false;
 
+        // Reset dash and double jump if on ground
         if (controller.collisions.below) {
             dashed = false;
             doubleJumped = false;
+        }
+
+        // Play jump particle if we hit ground
+        if (!groundedBeforeMovement && controller.collisions.below) {
+            PlayJumpParticle();
         }
 
         HandleAnimations();
@@ -270,7 +281,18 @@ public class Player : MonoBehaviour {
     }
 
     void HandleFlipping() {
-        sr.flipX = controller.collisions.faceDir == -1;
+        if (sr.flipX != (controller.collisions.faceDir == -1)) {
+            sr.flipX = controller.collisions.faceDir == -1;
+
+            // Flip particles
+            jumpParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
+            wallSlideParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
+            if (Math.Sign(wallSlideParticle.transform.localPosition.x) != controller.collisions.faceDir)
+                wallSlideParticle.transform.localPosition *= new Vector2(-1, 1);
+
+            if (controller.collisions.below)
+                PlayJumpParticle();
+        }
     }
 
     void UpdateHands() {
@@ -324,6 +346,13 @@ public class Player : MonoBehaviour {
             leftHandTarget.transform.position = grappleOrigin + (Vector3) perpendicular * -0.06f; 
             rightHandTarget.transform.position = grappleOrigin + (Vector3)perpendicular * 0.06f;
         }
+
+        // Play some particle effects
+        if (wall_slide && !wallSlideParticle.isPlaying) {
+            wallSlideParticle.Play();
+        } else if (!wall_slide && wallSlideParticle.isPlaying) {
+            wallSlideParticle.Stop();
+        }
     }
 
     void HandleCoyoteTimers() {
@@ -360,24 +389,42 @@ public class Player : MonoBehaviour {
         Vector2 grappleCenter = grappleHandCenter + (Vector2)transform.position;
 
         // Target the closest grapple point that's in front and above the player
+        // If none is in front and above, try to find one behind the player within a margin of 2 units
         Collider2D[] hit = Physics2D.OverlapCircleAll(grappleCenter, grappleRange, grapplePointLayer);
         Collider2D closestPoint = null;
         float closestDistance = Mathf.Infinity;
+        Collider2D closestPointBehind = null;
+        float closestDistanceBehind = Mathf.Infinity;
         foreach (Collider2D point in hit) {
-            // Check if the point is in the in front and above the player - with a margin of 2 units
-            if (point.transform.position.y + 2 > grappleCenter.y &&
-                (Math.Sign(point.transform.position.x - grappleCenter.x) == controller.collisions.faceDir || Mathf.Abs(point.transform.position.x - grappleCenter.x) <= 2) &&
-                point.transform != currentGrapplePoint) {
-                // Check line of sight
-                float distance = Vector2.Distance(point.transform.position, grappleCenter);
-                RaycastHit2D lineHit = Physics2D.Raycast(grappleCenter, point.transform.position - transform.position,
-                    distance, controller.collisionMask);
-                
-                if (distance < closestDistance && !lineHit) {
-                    closestDistance = distance;
-                    closestPoint = point;
-                }
+            // Check if the point is in the in front and above the player
+            int targetingDirection = Mathf.Abs(directionalInput.x) > 0.25f ? Math.Sign(directionalInput.x) : controller.collisions.faceDir;
+            int pointDirection = Math.Sign(point.transform.position.x - grappleCenter.x);
+
+            // Check line of sight
+            float distance = Vector2.Distance(point.transform.position, grappleCenter);
+            RaycastHit2D lineHit = Physics2D.Raycast(grappleCenter, point.transform.position - transform.position,
+                distance, controller.collisionMask);
+
+            // Check if it fullfills all requirements and is the closest
+            if (point.transform.position.y > grappleCenter.y &&
+                pointDirection == targetingDirection &&
+                point.transform != currentGrapplePoint &&
+                !lineHit && distance < closestDistance) {
+                closestDistance = distance;
+                closestPoint = point;
+            } else if (point.transform.position.y + 2 > grappleCenter.y &&
+                       (pointDirection == targetingDirection ||
+                        Mathf.Abs(point.transform.position.x - grappleCenter.x) <= 2) &&
+                       point.transform != currentGrapplePoint &&
+                       !lineHit && distance < closestDistanceBehind) {
+                closestDistanceBehind = distance;
+                closestPointBehind = point;
             }
+        }
+
+        // If no point is in front use a point behind
+        if (closestPoint == null && closestPointBehind != null) {
+            closestPoint = closestPointBehind;
         }
 
         if (closestPoint == null && grappleTarget != null) {
@@ -436,6 +483,7 @@ public class Player : MonoBehaviour {
 
     void Jump() {
         velocity.y = jumpPressed ? maxJumpVelocity : minJumpVelocity;
+        PlayJumpParticle();
         jumping = true;
     }
 
@@ -488,6 +536,11 @@ public class Player : MonoBehaviour {
         grappleExtendProgess = 0f;
     }
 
+    void PlayJumpParticle() {
+        jumpParticle.Play();
+    }
+
+    #region Input functions
     public void OnJumpPressed() {
         ResetGrapple();
 
@@ -498,7 +551,7 @@ public class Player : MonoBehaviour {
               wallGrabbing && Mathf.Abs(directionalInput.x) >= 0.5f && Mathf.Sign(directionalInput.x) != wallDirX && inventory.HasRelic("Sharpened Pickaxe")) {
             // Jump off wall
             WallJump();
-        } else if (wallGrabbing && inventory.HasRelic("Sharpened Pickaxe")) {
+        } else if (wallGrabbing && inventory.HasRelic("Sharpened Pickaxe") && wallClimbJumpTimestamp + wallClimbJumpDuration + wallClimbJumpCooldown <= Time.time) {
             // Jump up the wall
             WallClimbJump();
         } else if (controller.collisions.below || coyoteJumpTime + coyoteTime > Time.time) {
@@ -557,6 +610,7 @@ public class Player : MonoBehaviour {
     public void SetDirectionalInput(InputAction.CallbackContext ctx) {
         directionalInput = ctx.ReadValue<Vector2>();
     }
+    #endregion
 
     private void OnDrawGizmosSelected() {
         Gizmos.DrawWireSphere((Vector3) grappleHandCenter + transform.position, grappleHandRadius);
