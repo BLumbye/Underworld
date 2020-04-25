@@ -6,8 +6,20 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour {
+    #region Inspector variables
     [Header("General")]
     [SerializeField] private GameObject spriteObject;
+    [SerializeField] private GameObject spriteScaleObject;
+
+    [Header("Hands")]
+    [SerializeField] private GameObject handTargetContainer;
+    [SerializeField] private GameObject leftHand;
+    [SerializeField] private GameObject leftHandTarget;
+    [SerializeField] private GameObject rightHand;
+    [SerializeField] private GameObject rightHandTarget;
+    [SerializeField] private float handSmoothing = 50f;
+    [SerializeField] private Vector2 grappleHandCenter = Vector2.zero;
+    [SerializeField] private float grappleHandRadius = 0.5f;
 
     [Header("Movement")]
     [Tooltip("The maximum jump height in units."), Min(0f)]
@@ -59,18 +71,27 @@ public class Player : MonoBehaviour {
     [SerializeField] private LineRenderer grappleLine;
     [SerializeField] private float grappleSpeed = 4f;
     [SerializeField] private float shootTime = 0.3f;
+    [SerializeField] private float hangingDistance = 0.6f;
+    #endregion
 
+    #region Private variables
+    #region Hands
+    private SpriteRenderer leftHandSR;
+    private SpriteRenderer rightHandSR;
+    #endregion
 
-    // Coyote variables
+    #region Coyote
     private float coyoteJumpTime = -1f;
     private float coyoteWallslideTime = -1f;
     private int coyoteWallDirX = 1;
     private bool groundedBeforeMovement = false;
+    #endregion
 
-    // Jump buffer - if jump is pressed before reaching ground
+    #region Jump buffer
     private float jumpPressedTime = -1f;
+    #endregion
 
-    // Movement variables
+    #region Movement
     private Vector2 velocity;
     private float gravity;
     private float maxJumpVelocity;
@@ -78,8 +99,9 @@ public class Player : MonoBehaviour {
     private Vector2 velocitySmoothing;
     private bool jumping = false;
     private bool doubleJumped = false;
+    #endregion
 
-    // Wall variables
+    #region Wall sliding & climb
     private int wallDirX;
     private bool wallSliding = false;
     private bool wallGrabbing = false;
@@ -87,43 +109,57 @@ public class Player : MonoBehaviour {
     private int wallJumpDir;
     private float wallClimbJumpTimestamp = -1f;
     private float wallClimbJumpDuration;
+    #endregion
 
-    // Dash variables
+    #region Dash
     private float dashVelocity;
     private float dashStartedTimestamp = -1f;
     private float dashFinishedTimestamp = -1f;
     private bool dashed = false;
     private bool dashing = false;
     private int dashingDirection;
+    #endregion
 
-    // Grapple variables
+    #region Grapple
     private Transform grappleTarget;
     private Transform currentGrapplePoint;
     private bool grappling;
     private float grappleExtendProgess = 0f;
+    private Vector2 grappleVelocity;
+    private Vector3 grappleOrigin;
+    #endregion
 
-    // References
+    #region References
     private Controller2D controller;
     private SpriteRenderer sr;
     private Animator animator;
     private Inventory inventory;
+    #endregion
 
-    // Input variables
+    #region Input
     private Vector2 directionalInput;
     private bool downPressed = false;
     private bool jumpPressed = false;
     private bool wallClimbPressed = false;
+    #endregion
+    #endregion
 
-    // Computed variables
+    #region Computed variables
     private bool wallJumping { get => wallJumpTimestamp + wallJumpReturnDelay > Time.time; }
     private bool wallClimbJumping { get => wallClimbJumpTimestamp + wallClimbJumpDuration > Time.time; }
+    private Vector2 ropeVector {
+        get =>
+            (Vector2) (currentGrapplePoint.position - transform.position) - grappleHandCenter -
+            new Vector2(0, grappleHandRadius + hangingDistance);
+    }
+    #endregion
 
     // Start is called before the first frame update
     void Start() {
         // Set references
         controller = GetComponent<Controller2D>();
         sr = spriteObject.GetComponent<SpriteRenderer>();
-        animator = spriteObject.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         inventory = Inventory.Instance;
 
         // Calculate gravity and jump velocity
@@ -136,6 +172,10 @@ public class Player : MonoBehaviour {
 
         // Calculate dash velocity
         dashVelocity = dashLength / dashTime;
+
+        // Get hand renderers
+        leftHandSR = leftHand.GetComponent<SpriteRenderer>();
+        rightHandSR = rightHand.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -176,6 +216,7 @@ public class Player : MonoBehaviour {
 
         HandleAnimations();
         HandleCoyoteTimers();
+        UpdateHands();
     }
 
     void CalculateVelocity() {
@@ -232,18 +273,57 @@ public class Player : MonoBehaviour {
         sr.flipX = controller.collisions.faceDir == -1;
     }
 
+    void UpdateHands() {
+        // Set the sorting order of hands
+        leftHandSR.sortingOrder = controller.collisions.faceDir * -2;
+        rightHandSR.sortingOrder = controller.collisions.faceDir * 2;
+
+        // Move hands
+        leftHand.transform.position = Vector2.Lerp(leftHand.transform.position, leftHandTarget.transform.position,  grappling ? 1 : handSmoothing * Time.deltaTime);
+        rightHand.transform.position = Vector2.Lerp(rightHand.transform.position, rightHandTarget.transform.position, grappling ? 1 : handSmoothing * Time.deltaTime);
+    }
+
     void HandleAnimations() {
         bool grounded = controller.collisions.below;
+        bool right = controller.collisions.faceDir == 1;
         float walk_speed = Mathf.Abs(velocity.x) / moveSpeed;
         bool running = grounded && walk_speed > 0.25f;
         bool walking = grounded && walk_speed > 0.01f && !running;
-        bool idle = !walking && !running;
+        bool wall_slide = (wallSliding || wallGrabbing && velocity.y <= 0.5f) && !grounded;
+        bool wall_climb = wallGrabbing && velocity.y > 0.5f && !grounded && !wallClimbJumping;
+        bool idle = !walking && !running && grounded;
+        bool jumping = !grounded && velocity.y > 0 && !wall_slide && !wall_climb || wallClimbJumping || grappling;
+        bool falling = !grounded && !jumping && !wall_slide && !wall_climb && !grappling;
 
+        // Set variables in the animator
         animator.SetBool("grounded", grounded);
         animator.SetBool("walking", walking);
-        animator.SetBool("running", running);
+        animator.SetBool("running_left", running && !right);
+        animator.SetBool("running_right", running && right);
         animator.SetBool("idle", idle);
+        animator.SetBool("jumping", jumping);
+        animator.SetBool("falling", falling);
+        animator.SetBool("wall_slide_left", wall_slide && !right);
+        animator.SetBool("wall_slide_right", wall_slide && right);
+        animator.SetBool("wall_climb_left", wall_climb && !right);
+        animator.SetBool("wall_climb_right", wall_climb && right);
+
         animator.SetFloat("walk_speed", walk_speed);
+
+        // Set the scale if in the jumping or falling animation
+        if ((jumping || falling) && !grappling) {
+            spriteScaleObject.transform.localScale = new Vector3(1 - Mathf.Abs(velocity.y) / 300, 1 + Mathf.Abs(velocity.y) / 300, 1);
+        } else {
+            spriteScaleObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        // Grappling animations are programmed as they are way too dynamic for the built-in animation system
+        if (grappling) {
+            // Make the hands hang out from the player towards the grapple target, but perpendicular from the rope besides each other
+            Vector2 perpendicular = Vector2.Perpendicular(currentGrapplePoint.position - transform.position + (Vector3) grappleHandCenter).normalized;
+            leftHandTarget.transform.position = grappleOrigin + (Vector3) perpendicular * -0.06f; 
+            rightHandTarget.transform.position = grappleOrigin + (Vector3)perpendicular * 0.06f;
+        }
     }
 
     void HandleCoyoteTimers() {
@@ -277,18 +357,20 @@ public class Player : MonoBehaviour {
         if (!inventory.HasRelic("Grappling Hook"))
             return;
 
+        Vector2 grappleCenter = grappleHandCenter + (Vector2)transform.position;
+
         // Target the closest grapple point that's in front and above the player
-        Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, grappleRange, grapplePointLayer);
+        Collider2D[] hit = Physics2D.OverlapCircleAll(grappleCenter, grappleRange, grapplePointLayer);
         Collider2D closestPoint = null;
         float closestDistance = Mathf.Infinity;
         foreach (Collider2D point in hit) {
             // Check if the point is in the in front and above the player - with a margin of 2 units
-            if (point.transform.position.y + 2 > transform.position.y &&
-                (Math.Sign(point.transform.position.x - transform.position.x) == controller.collisions.faceDir || Mathf.Abs(point.transform.position.x - transform.position.x) <= 2) &&
+            if (point.transform.position.y + 2 > grappleCenter.y &&
+                (Math.Sign(point.transform.position.x - grappleCenter.x) == controller.collisions.faceDir || Mathf.Abs(point.transform.position.x - grappleCenter.x) <= 2) &&
                 point.transform != currentGrapplePoint) {
                 // Check line of sight
-                float distance = Vector2.Distance(point.transform.position, transform.position);
-                RaycastHit2D lineHit = Physics2D.Raycast(transform.position, point.transform.position - transform.position,
+                float distance = Vector2.Distance(point.transform.position, grappleCenter);
+                RaycastHit2D lineHit = Physics2D.Raycast(grappleCenter, point.transform.position - transform.position,
                     distance, controller.collisionMask);
                 
                 if (distance < closestDistance && !lineHit) {
@@ -310,13 +392,18 @@ public class Player : MonoBehaviour {
             grappleTarget = closestPoint.transform;
         }
 
-        if (grappling && grappleExtendProgess < 1) {
-            grappleExtendProgess += Time.deltaTime / shootTime;
-            grappleLine.SetPositions(new Vector3[] {
-                transform.position, transform.position + (currentGrapplePoint.position - transform.position) * grappleExtendProgess
-            });
-        } else if (grappling) {
-            Vector2 ropeVector = currentGrapplePoint.position - transform.position;
+        if (grappling) {
+            grappleOrigin = (currentGrapplePoint.position - (Vector3) grappleCenter).normalized * grappleHandRadius + (Vector3) grappleHandCenter + transform.position;
+
+            if (grappleExtendProgess < 1) {
+                grappleExtendProgess += Time.deltaTime / shootTime;
+                grappleLine.SetPositions(new Vector3[] {
+                    grappleOrigin, grappleOrigin + (currentGrapplePoint.position - grappleOrigin) * grappleExtendProgess
+                });
+                return;
+            }
+
+            // Offset this because we want to hang from it with the hands above us and a little extra space
             float distance = ropeVector.magnitude;
             if (distance > grappleRange) {
                 ResetGrapple();
@@ -324,7 +411,7 @@ public class Player : MonoBehaviour {
             }
 
             grappleLine.SetPositions(new Vector3[] {
-                transform.position, currentGrapplePoint.position
+                grappleOrigin, currentGrapplePoint.position
             });
 
             // Apply gravity and calculate velocity
@@ -332,8 +419,10 @@ public class Player : MonoBehaviour {
                 velocity.y += gravity * Time.deltaTime;
                 Vector2 perpendicular = Vector2.Perpendicular(currentGrapplePoint.position - transform.position);
                 velocity = Vector2.Dot(velocity, perpendicular) / perpendicular.sqrMagnitude * perpendicular * (1 - 0.9f * Time.deltaTime);
+                grappleVelocity = ropeVector.normalized * grappleSpeed;
             } else {
                 velocity = Vector2.zero;
+                grappleVelocity = Vector2.zero;
                 dashed = false;
                 doubleJumped = false;
                 if (Mathf.Abs(directionalInput.x) > 0.5)
@@ -341,14 +430,13 @@ public class Player : MonoBehaviour {
             }
 
             // Move - but if were very close, then just go straight to the point without velocity
-            controller.Move(distance < 0.1 ? ropeVector : velocity * Time.deltaTime + ropeVector.normalized * grappleSpeed * Time.deltaTime);
+            controller.Move(distance < 0.1f ? distance < 0.001f ? Vector2.zero : ropeVector : (velocity + grappleVelocity) * Time.deltaTime);
         }
     }
 
     void Jump() {
         velocity.y = jumpPressed ? maxJumpVelocity : minJumpVelocity;
         jumping = true;
-        ResetGrapple();
     }
 
     void WallJump() {
@@ -382,7 +470,7 @@ public class Player : MonoBehaviour {
             return;
 
         if (grappleTarget) {
-            grappleExtendProgess = 0f;
+            ResetGrapple();
             grappling = true;
             grappleLine.enabled = true;
             currentGrapplePoint = grappleTarget;
@@ -392,12 +480,17 @@ public class Player : MonoBehaviour {
     }
 
     void ResetGrapple() {
+        velocity += grappleVelocity;
         grappling = false;
         grappleLine.enabled = false;
         currentGrapplePoint = null;
+        grappleVelocity = Vector2.zero;
+        grappleExtendProgess = 0f;
     }
 
     public void OnJumpPressed() {
+        ResetGrapple();
+
         if (downPressed && controller.collisions.standingOnHollow) {
             // If holding down and standing on a hollow platform fall through instead
             controller.FallThroughPlatform();
@@ -463,5 +556,9 @@ public class Player : MonoBehaviour {
 
     public void SetDirectionalInput(InputAction.CallbackContext ctx) {
         directionalInput = ctx.ReadValue<Vector2>();
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.DrawWireSphere((Vector3) grappleHandCenter + transform.position, grappleHandRadius);
     }
 }
