@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class MenuButton : MonoBehaviour {
+public class TrapGolemProjectile : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
 

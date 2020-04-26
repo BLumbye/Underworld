@@ -3,6 +3,7 @@ using Cinemachine;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour {
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour {
     [Header("General")]
     [SerializeField] private GameObject spriteObject;
     [SerializeField] private GameObject spriteScaleObject;
+    [SerializeField] private int health = 3;
 
     [Header("Hands")]
     [SerializeField] private GameObject handTargetContainer;
@@ -538,6 +540,13 @@ public class Player : MonoBehaviour {
 
     void PlayJumpParticle() {
         jumpParticle.Play();
+    }
+
+    void Damage() {
+        health--;
+        if (health <= 0) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     #region Input functions
