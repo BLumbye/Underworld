@@ -46,10 +46,6 @@ public class Player : MonoBehaviour {
     [SerializeField] private Vector2 wallJumpForce = new Vector2(7.5f, 16f);
     [Tooltip("The time before you can move back towards the wall.")]
     [SerializeField] private float wallJumpReturnDelay = 0.7f;
-    //[Tooltip("The force applied when jumping whilst no directional input is received.")]
-    //[SerializeField] private Vector2 wallJumpOff = new Vector2(8.5f, 7f);
-    //[Tooltip("The force applied when jumping while facing away from the wall.")]
-    //[SerializeField] private Vector2 wallLeap = new Vector2(18f, 17f);
     [Label("Maximum Wall Slide Speed"), Tooltip("The maximum speed when sliding. Sliding is cancelled whilst pressing down."), Min(0f)]
     [SerializeField] private float wallSlideSpeedMax = 3;
 
@@ -542,7 +538,7 @@ public class Player : MonoBehaviour {
         jumpParticle.Play();
     }
 
-    void Damage() {
+    public void Damage() {
         health--;
         if (health <= 0) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

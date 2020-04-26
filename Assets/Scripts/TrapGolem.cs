@@ -31,9 +31,9 @@ public class TrapGolem : MonoBehaviour {
     }
 
     void Explode() {
-        float angleDifference = 180f / projectileCount;
+        float angleDifference = 180f / (projectileCount - 1);
         for (int i = 0; i < projectileCount; i++) {
-            float angle = -i * angleDifference;
+            float angle = i * angleDifference;
             Vector3 position = transform.position + (Vector3) projectileEmissionCenter + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * projectileEmissionRadius;
             Instantiate(projectilePrefab, position, Quaternion.Euler(0, 0, angle));
         }
@@ -42,7 +42,6 @@ public class TrapGolem : MonoBehaviour {
     }
 
     void GrowingFinished() {
-        animator.SetBool("grown", true);
         grown = true;
     }
 
