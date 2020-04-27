@@ -55,6 +55,9 @@ MonoBehaviour:
   projectileEmissionRadius: 0.75
   projectileEmissionCenter: {x: 0, y: 0.3}
   projectileCount: 5
+  emissionColor: {r: 0.15686275, g: 0.8784314, b: 1.4980392, a: 0}
+  deathParticle: {fileID: 2184147683968468234, guid: 9d8209d1b3e750843a493c6948f79c72,
+    type: 3}
 --- !u!212 &478510296534751987
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -73,7 +76,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: d90239a45dfdfa347ae364a78b3f02a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

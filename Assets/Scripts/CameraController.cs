@@ -23,11 +23,26 @@ public class CameraController : MonoBehaviour {
     [Tooltip("The percentage of the height of the screen that is in the deadzone."), Range(0f, 1f), EnableIf("deadzoneEnabled")]
     public float deadzoneHeight = 0.1f;
 
+    [Header("Screenshake")]
+    public AnimationCurve traumaCurve;
+    public float traumaReduction;
+    public Vector2 maxTranslation;
+    public float maxAngle;
+    public float speedScale;
+
+
     private new Camera camera;
     private Vector2 velocity = Vector2.zero;
+    private Vector2 position;
+
+    #region Screenshake variables
+    private Vector2 shakeOffset = Vector2.zero;
+    public float trauma;
+    #endregion
 
     void Start() {
         camera = GetComponent<Camera>();
+        position = new Vector3(target.transform.position.x, target.transform.position.y, -10);
     }
 
     // Late update is used since the camera should move after movement
@@ -35,15 +50,17 @@ public class CameraController : MonoBehaviour {
         Vector2 newPos = Vector2.zero;
 
         if (deadzoneEnabled && smoothingEnabled)
-            newPos = SmoothingAndDeadzone(transform.position, target.transform.position);
+            newPos = SmoothingAndDeadzone(position, target.transform.position);
         else if (smoothingEnabled)
-            newPos = Smoothing(transform.position, target.transform.position);
+            newPos = Smoothing(position, target.transform.position);
         else if (deadzoneEnabled)
-            newPos = Deadzone(transform.position, target.transform.position);
+            newPos = Deadzone(position, target.transform.position);
         else
             newPos = target.transform.position;
 
-        transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
+        position = new Vector3(newPos.x, newPos.y, transform.position.z);
+        UpdateScreenshake();
+        transform.position = (Vector3) (position + shakeOffset) + new Vector3(0, 0, -10);
     }
 
     Vector2 SmoothingAndDeadzone(Vector2 position, Vector2 targetPosition) {
@@ -91,6 +108,19 @@ public class CameraController : MonoBehaviour {
         }
 
         return newPosition;
+    }
+
+    void UpdateScreenshake() {
+        float shake = traumaCurve.Evaluate(trauma);
+
+        shakeOffset = new Vector2(
+            maxTranslation.x * shake * (Mathf.PerlinNoise(1000, Time.time * speedScale) * 2 - 1),
+            maxTranslation.y * shake * (Mathf.PerlinNoise(2000, Time.time * speedScale) * 2 - 1)
+        );
+
+        transform.localEulerAngles = new Vector3(0, 0, maxAngle * shake * (Mathf.PerlinNoise(3000, Time.time * speedScale) * 2 - 1));
+
+        trauma = Mathf.Max(0, trauma - traumaReduction * Time.deltaTime);
     }
 
     Vector2 GetDeadzoneSize() {

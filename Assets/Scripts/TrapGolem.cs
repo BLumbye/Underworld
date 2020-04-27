@@ -12,6 +12,7 @@ public class TrapGolem : MonoBehaviour {
     [SerializeField] private int projectileCount = 5;
     [ColorUsage(true, true)]
     [SerializeField] private Color emissionColor;
+    [SerializeField] private GameObject deathParticle;
 
     private bool growing = false;
     private bool grown = false;
@@ -51,6 +52,7 @@ public class TrapGolem : MonoBehaviour {
             Instantiate(projectilePrefab, position, Quaternion.Euler(0, 0, angle));
         }
 
+        Instantiate(deathParticle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

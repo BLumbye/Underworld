@@ -156,6 +156,7 @@ public class Player : MonoBehaviour {
     private SpriteRenderer sr;
     private Animator animator;
     private Inventory inventory;
+    private CameraController camera;
     #endregion
 
     #region Input
@@ -183,6 +184,7 @@ public class Player : MonoBehaviour {
         sr = spriteObject.GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         inventory = Inventory.Instance;
+        camera = Camera.main.GetComponent<CameraController>();
 
         // Calculate gravity and jump velocity
         gravity = -(2 * maxJumpHeight) / (jumpTime * jumpTime);
