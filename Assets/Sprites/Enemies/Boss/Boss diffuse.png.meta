@@ -1,7 +1,73 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: c9a3668ae384e374d89eaba374865b27
 TextureImporter:
   internalIDToNameTable: []
+=======
+guid: b6fc96fc4be5c5c42adcc020a10b39b7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2411683604029071431
+    second: Boss diffuse idle 0
+  - first:
+      213: 9208063860873889744
+    second: Boss diffuse idle 1
+  - first:
+      213: -231358508276232360
+    second: Boss diffuse idle 2
+  - first:
+      213: -467567967010131328
+    second: Boss diffuse idle 3
+  - first:
+      213: 737137745455373407
+    second: Boss diffuse attack 0
+  - first:
+      213: -331755154847994441
+    second: Boss diffuse attack 1
+  - first:
+      213: -6822652311083248386
+    second: Boss diffuse attack 2
+  - first:
+      213: 7992529347472923961
+    second: Boss diffuse attack 3
+  - first:
+      213: -4139179755520344612
+    second: Boss diffuse attack 4
+  - first:
+      213: 4119843389419007707
+    second: Boss diffuse attack 5
+  - first:
+      213: 4179625644495335464
+    second: Boss diffuse attack 6
+  - first:
+      213: 498970689835971407
+    second: Boss diffuse summon 0
+  - first:
+      213: -6151428234825793397
+    second: Boss diffuse summon 1
+  - first:
+      213: -7356095511801705861
+    second: Boss diffuse summon 2
+  - first:
+      213: -3840558266176238966
+    second: Boss diffuse summon 3
+  - first:
+      213: 2249812610878956055
+    second: Boss diffuse summon 4
+  - first:
+      213: -3327453324912276815
+    second: Boss diffuse summon 5
+  - first:
+      213: -8567912798690258682
+    second: Boss diffuse stunned 0
+  - first:
+      213: -6519305439982712882
+    second: Boss diffuse stunned 1
+  - first:
+      213: 2469967182312578132
+    second: Boss diffuse stunned 2
+>>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -36,11 +102,19 @@ TextureImporter:
     mipBias: -100
     wrapU: 1
     wrapV: 1
+<<<<<<< HEAD
     wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
+=======
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+>>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -83,6 +157,7 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD
   - serializedVersion: 3
     buildTarget: iPhone
     maxTextureSize: 2048
@@ -110,6 +185,431 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
+=======
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Boss diffuse idle 0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 174
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bf963f2a8af78ed0800000000000000
+      internalID: -2411683604029071431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse idle 1
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 174
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d700888b4d99cf70800000000000000
+      internalID: 9208063860873889744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse idle 2
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 174
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85f4e6a99ac0accf0800000000000000
+      internalID: -231358508276232360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse idle 3
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 174
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 082720a496dd289f0800000000000000
+      internalID: -467567967010131328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse attack 0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 116
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5c566cbfd6da3a00800000000000000
+      internalID: 737137745455373407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse attack 1
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 116
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bd61e2c17e556bf0800000000000000
+      internalID: -331755154847994441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse attack 2
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 116
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef492ebfed11151a0800000000000000
+      internalID: -6822652311083248386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse attack 3
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 116
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93d1205681b2bee60800000000000000
+      internalID: 7992529347472923961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse attack 4
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 116
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cddb8b251fdae86c0800000000000000
+      internalID: -4139179755520344612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse attack 5
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 116
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdeaf8c1cbf9c2930800000000000000
+      internalID: 4119843389419007707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse attack 6
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 116
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 820f14a0163010a30800000000000000
+      internalID: 4179625644495335464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse summon 0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 58
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f433101e233bce600800000000000000
+      internalID: 498970689835971407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse summon 1
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 58
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8086e1bc9cb1aaa0800000000000000
+      internalID: -6151428234825793397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse summon 2
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 58
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7ac6353b16e9e990800000000000000
+      internalID: -7356095511801705861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse summon 3
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 58
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8a0065ea9893bac0800000000000000
+      internalID: -3840558266176238966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse summon 4
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 58
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71262aa46a0f83f10800000000000000
+      internalID: 2249812610878956055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse summon 5
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 58
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ba49e1a4d282d1d0800000000000000
+      internalID: -3327453324912276815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse stunned 0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6015b8f44b8a81980800000000000000
+      internalID: -8567912798690258682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse stunned 1
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 0
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec70f8b3e36c685a0800000000000000
+      internalID: -6519305439982712882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss diffuse stunned 2
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 0
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45c1d9cd016174220800000000000000
+      internalID: 2469967182312578132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+>>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +619,15 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
+<<<<<<< HEAD
     secondaryTextures: []
+=======
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: 70adf515b3388ff43bf2e0c060125a18, type: 3}
+      name: _NormalMap
+    - texture: {fileID: 2800000, guid: f9db1c2b838748245a94722ba4c9146a, type: 3}
+      name: _Emission
+>>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
