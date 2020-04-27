@@ -6,6 +6,7 @@ public class TrapGolem : MonoBehaviour {
     [Header("Settings")]
     [SerializeField] private float range;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask groundLayer;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float projectileEmissionRadius = 0.5f;
     [SerializeField] private Vector2 projectileEmissionCenter = new Vector2(0, 0.25f);
@@ -61,7 +62,12 @@ public class TrapGolem : MonoBehaviour {
     }
 
     bool IsPlayerInRange() {
-        return Physics2D.OverlapCircle(transform.position, range, playerLayer) != null;
+        Collider2D inRange = Physics2D.OverlapCircle((Vector2) transform.position + projectileEmissionCenter, range, playerLayer);
+        if (inRange) {
+            return !Physics2D.Raycast((Vector2)transform.position + projectileEmissionCenter,
+                (Vector2)(inRange.transform.position - transform.position) + projectileEmissionCenter, range, groundLayer);
+        }
+        return false;
     }
 
     private void OnDrawGizmosSelected() {

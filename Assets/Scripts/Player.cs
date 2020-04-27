@@ -104,6 +104,8 @@ public class Player : MonoBehaviour {
     private int health;
     private List<Image> heartObjects = new List<Image>();
     private Vignette vignette;
+    private float defaultVignetteIntensity;
+    private Color defaultVignetteColor;
     #endregion
 
     #region Coyote
@@ -265,6 +267,8 @@ public class Player : MonoBehaviour {
         }
 
         postProcessingVolume.profile.TryGet(out vignette);
+        defaultVignetteIntensity = vignette.intensity.value;
+        defaultVignetteColor = vignette.color.value;
     }
 
     void CalculateVelocity() {
@@ -612,13 +616,11 @@ public class Player : MonoBehaviour {
     }
 
     IEnumerator DamageAnimation() {
-        float defaultIntensity = vignette.intensity.value;
-        Color defaultColor = vignette.color.value;
         DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, 0.4f, 0.1f);
         DOTween.To(() => vignette.color.value, x => vignette.color.value = x, Color.red, 0.1f);
         yield return new WaitForSeconds(0.175f);
-        DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, defaultIntensity, 1f).SetEase(Ease.OutCubic);
-        DOTween.To(() => vignette.color.value, x => vignette.color.value = x, defaultColor, 1f).SetEase(Ease.OutCubic);
+        DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, defaultVignetteIntensity, 1f).SetEase(Ease.OutCubic);
+        DOTween.To(() => vignette.color.value, x => vignette.color.value = x, defaultVignetteColor, 1f).SetEase(Ease.OutCubic);
     }
 
     public void UpdateHearts() {
