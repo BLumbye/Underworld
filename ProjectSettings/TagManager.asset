@@ -45,6 +45,9 @@ TagManager:
   - name: Background
     uniqueID: 2305248891
     locked: 0
+  - name: ProjectilesInactive
+    uniqueID: 633367225
+    locked: 0
   - name: Tiles
     uniqueID: 558026803
     locked: 0
@@ -54,9 +57,12 @@ TagManager:
   - name: Enemies
     uniqueID: 2074170617
     locked: 0
-  - name: Foreground
-    uniqueID: 3189424971
-    locked: 0
   - name: Particles
     uniqueID: 604254107
+    locked: 0
+  - name: Projectiles
+    uniqueID: 1277800361
+    locked: 0
+  - name: Foreground
+    uniqueID: 3189424971
     locked: 0
