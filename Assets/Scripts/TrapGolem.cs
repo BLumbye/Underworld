@@ -10,17 +10,30 @@ public class TrapGolem : MonoBehaviour {
     [SerializeField] private float projectileEmissionRadius = 0.5f;
     [SerializeField] private Vector2 projectileEmissionCenter = new Vector2(0, 0.25f);
     [SerializeField] private int projectileCount = 5;
+    [ColorUsage(true, true)]
+    [SerializeField] private Color emissionColor;
 
     private bool growing = false;
     private bool grown = false;
 
     private Animator animator;
+    private SpriteRenderer sr;
+    private MaterialPropertyBlock propertyBlock;
 
     void Start() {
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        propertyBlock = new MaterialPropertyBlock();
+        sr.GetPropertyBlock(propertyBlock);
+        propertyBlock.SetColor("_EmissionColor", emissionColor);
+        GetComponent<SpriteRenderer>().SetPropertyBlock(propertyBlock);
     }
 
     void Update() {
+        if (emissionColor != propertyBlock.GetColor("_EmissionColor")) {
+            propertyBlock.SetColor("_EmissionColor", emissionColor);
+        }
+
         bool playerInRange = IsPlayerInRange();
         if (playerInRange && !grown && !growing) {
             growing = true;

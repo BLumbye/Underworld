@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections;
+using Boo.Lang;
 using Cinemachine;
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour {
@@ -11,7 +17,7 @@ public class Player : MonoBehaviour {
     [Header("General")]
     [SerializeField] private GameObject spriteObject;
     [SerializeField] private GameObject spriteScaleObject;
-    [SerializeField] private int health = 3;
+    [SerializeField] private int maxHealth = 3;
 
     [Header("Hands")]
     [SerializeField] private GameObject handTargetContainer;
@@ -22,6 +28,13 @@ public class Player : MonoBehaviour {
     [SerializeField] private float handSmoothing = 50f;
     [SerializeField] private Vector2 grappleHandCenter = Vector2.zero;
     [SerializeField] private float grappleHandRadius = 0.5f;
+
+    [Header("UI")]
+    [SerializeField] private GameObject heartContainer;
+    [SerializeField] private GameObject heartObject;
+    [SerializeField] private Sprite activeHeartSprite;
+    [SerializeField] private Sprite inactiveHeartSprite;
+    [SerializeField] private Volume postProcessingVolume;
 
     [Header("Movement")]
     [Tooltip("The maximum jump height in units."), Min(0f)]
@@ -81,6 +94,12 @@ public class Player : MonoBehaviour {
     #region Hands
     private SpriteRenderer leftHandSR;
     private SpriteRenderer rightHandSR;
+    #endregion
+
+    #region Hearts
+    private int health;
+    private List<Image> heartObjects = new List<Image>();
+    private Vignette vignette;
     #endregion
 
     #region Coyote
@@ -179,6 +198,12 @@ public class Player : MonoBehaviour {
         // Get hand renderers
         leftHandSR = leftHand.GetComponent<SpriteRenderer>();
         rightHandSR = rightHand.GetComponent<SpriteRenderer>();
+
+        // Health
+        health = maxHealth;
+        InitializeHearts();
+
+        DOTween.Init();
     }
 
     // Update is called once per frame
@@ -226,6 +251,14 @@ public class Player : MonoBehaviour {
         HandleAnimations();
         HandleCoyoteTimers();
         UpdateHands();
+    }
+
+    void InitializeHearts() {
+        for (int i = 0; i < maxHealth; i++) {
+            heartObjects.Add(Instantiate(heartObject, heartContainer.transform).GetComponent<Image>());
+        }
+
+        postProcessingVolume.profile.TryGet(out vignette);
     }
 
     void CalculateVelocity() {
@@ -542,6 +575,28 @@ public class Player : MonoBehaviour {
         health--;
         if (health <= 0) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        UpdateHearts();
+        StartCoroutine(DamageAnimation());
+    }
+
+    IEnumerator DamageAnimation() {
+        float defaultIntensity = vignette.intensity.value;
+        Color defaultColor = vignette.color.value;
+        DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, 0.4f, 0.1f);
+        DOTween.To(() => vignette.color.value, x => vignette.color.value = x, Color.red, 0.1f);
+        yield return new WaitForSeconds(0.175f);
+        DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, defaultIntensity, 1f).SetEase(Ease.OutCubic);
+        DOTween.To(() => vignette.color.value, x => vignette.color.value = x, defaultColor, 1f).SetEase(Ease.OutCubic);
+    }
+
+    public void UpdateHearts() {
+        for (int i = 0; i < maxHealth; i++) {
+            if (health >= i + 1 && heartObjects[i].sprite != activeHeartSprite) {
+                heartObjects[i].sprite = activeHeartSprite;
+            } else if (health < i + 1 && heartObjects[i].sprite != inactiveHeartSprite) {
+                heartObjects[i].sprite = inactiveHeartSprite;
+            }
         }
     }
 
