@@ -22,7 +22,7 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"2126d421-95a1-452a-bd91-af0948ec012a\"\n    },\n    \"m_Name\": \"Emission Color\",\n    \"m_DefaultReferenceName\": \"Color_8E126C77\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": {\n        \"r\": 0.3294117748737335,\n        \"g\": 1.9921568632125855,\n        \"b\": 3.560784339904785,\n        \"a\": 0.0\n    },\n    \"m_ColorMode\": 1\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"2126d421-95a1-452a-bd91-af0948ec012a\"\n    },\n    \"m_Name\": \"Emission Color\",\n    \"m_DefaultReferenceName\": \"Color_8E126C77\",\n    \"m_OverrideReferenceName\": \"_EmissionColor\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": {\n        \"r\": 0.3294117748737335,\n        \"g\": 1.9921568632125855,\n        \"b\": 3.560784339904785,\n        \"a\": 0.0\n    },\n    \"m_ColorMode\": 1\n}"
         }
     ],
     "m_SerializedKeywords": [],

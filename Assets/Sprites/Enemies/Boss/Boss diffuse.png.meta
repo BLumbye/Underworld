@@ -1,4 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: c9a3668ae384e374d89eaba374865b27
+TextureImporter:
+  internalIDToNameTable: []
+=======
 guid: b6fc96fc4be5c5c42adcc020a10b39b7
 TextureImporter:
   internalIDToNameTable:
@@ -62,6 +67,7 @@ TextureImporter:
   - first:
       213: 2469967182312578132
     second: Boss diffuse stunned 2
+>>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -96,11 +102,19 @@ TextureImporter:
     mipBias: -100
     wrapU: 1
     wrapV: 1
+<<<<<<< HEAD
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+=======
     wrapW: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
+>>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -143,6 +157,35 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites: []
+=======
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -566,6 +609,7 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+>>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
     outline: []
     physicsShape: []
     bones: []
@@ -575,11 +619,15 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
+<<<<<<< HEAD
+    secondaryTextures: []
+=======
     secondaryTextures:
     - texture: {fileID: 2800000, guid: 70adf515b3388ff43bf2e0c060125a18, type: 3}
       name: _NormalMap
     - texture: {fileID: 2800000, guid: f9db1c2b838748245a94722ba4c9146a, type: 3}
       name: _Emission
+>>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
