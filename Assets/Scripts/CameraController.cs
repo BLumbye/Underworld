@@ -120,7 +120,7 @@ public class CameraController : MonoBehaviour {
 
         transform.localEulerAngles = new Vector3(0, 0, maxAngle * shake * (Mathf.PerlinNoise(3000, Time.time * speedScale) * 2 - 1));
 
-        trauma = Mathf.Max(0, trauma - traumaReduction * Time.deltaTime);
+        trauma = Mathf.Clamp(trauma - traumaReduction * Time.deltaTime, 0, 1);
     }
 
     Vector2 GetDeadzoneSize() {

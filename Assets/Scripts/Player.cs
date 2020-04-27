@@ -88,6 +88,10 @@ public class Player : MonoBehaviour {
     [Header("Particles")]
     [SerializeField] ParticleSystem jumpParticle;
     [SerializeField] ParticleSystem wallSlideParticle;
+    [SerializeField] ParticleSystem wallClimbParticle;
+    [SerializeField] ParticleSystem wallJumpParticle;
+    [SerializeField] ParticleSystem dashParticle;
+    [SerializeField] ParticleSystem dashGhostParticle;
     #endregion
 
     #region Private variables
@@ -320,8 +324,17 @@ public class Player : MonoBehaviour {
             // Flip particles
             jumpParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
             wallSlideParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
-            if (Math.Sign(wallSlideParticle.transform.localPosition.x) != controller.collisions.faceDir)
+            wallClimbParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
+            wallJumpParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
+            dashParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
+            dashGhostParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
+            if (Math.Sign(wallSlideParticle.transform.localPosition.x) != controller.collisions.faceDir) {
                 wallSlideParticle.transform.localPosition *= new Vector2(-1, 1);
+                wallClimbParticle.transform.localPosition *= new Vector2(-1, 1);
+                wallJumpParticle.transform.localPosition *= new Vector2(-1, 1);
+                dashParticle.transform.localPosition *= new Vector2(-1, 1);
+                dashGhostParticle.transform.localPosition *= new Vector2(-1, 1);
+            }
 
             if (controller.collisions.below)
                 PlayJumpParticle();
@@ -385,6 +398,18 @@ public class Player : MonoBehaviour {
             wallSlideParticle.Play();
         } else if (!wall_slide && wallSlideParticle.isPlaying) {
             wallSlideParticle.Stop();
+        }
+        if (wall_climb && !wallClimbParticle.isPlaying) {
+            wallClimbParticle.Play();
+        } else if (!wall_climb && wallClimbParticle.isPlaying) {
+            wallClimbParticle.Stop();
+        }
+        if (dashing && !dashParticle.isPlaying) {
+            dashParticle.Play();
+            dashGhostParticle.Play();
+        } else if (!dashing && dashParticle.isPlaying) {
+            dashParticle.Stop();
+            dashGhostParticle.Stop();
         }
     }
 
@@ -528,11 +553,13 @@ public class Player : MonoBehaviour {
         velocity.y = wallJumpForce.y;
         wallJumpTimestamp = Time.time;
         wallJumpDir = -wallDirX;
+        wallJumpParticle.Play();
     }
 
     void WallClimbJump() {
         velocity.y = wallClimbJumpForce;
         wallClimbJumpTimestamp = Time.time;
+        wallJumpParticle.Play();
     }
 
     void Dash() {
@@ -541,7 +568,7 @@ public class Player : MonoBehaviour {
 
         dashing = true;
         dashed = true;
-        dashingDirection = Math.Sign(directionalInput.x);
+        dashingDirection = Mathf.Abs(directionalInput.x) > 0.25f ? Math.Sign(directionalInput.x) : controller.collisions.faceDir;
         dashStartedTimestamp = Time.time;
         ResetGrapple();
     }
@@ -578,6 +605,8 @@ public class Player : MonoBehaviour {
         if (health <= 0) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
+        camera.trauma += 0.3f;
         UpdateHearts();
         StartCoroutine(DamageAnimation());
     }

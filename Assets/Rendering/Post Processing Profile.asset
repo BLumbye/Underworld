@@ -51,8 +51,8 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   intensity:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.562
     min: 0
     max: 1
 --- !u!114 &11400000
@@ -75,6 +75,7 @@ MonoBehaviour:
   - {fileID: 4254458706768560706}
   - {fileID: 7388710021042838067}
   - {fileID: 539171290281970414}
+  - {fileID: -7829938904619000675}
 --- !u!114 &539171290281970414
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -125,7 +126,7 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 1.5
+    m_Value: 5
     min: 0
   scatter:
     m_OverrideState: 1
