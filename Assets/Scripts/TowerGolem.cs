@@ -57,8 +57,10 @@ public class TowerGolem : MonoBehaviour {
     bool IsPlayerInRange() {
         Collider2D inRange = Physics2D.OverlapCircle((Vector2) transform.position + projectileEmission, range, playerLayer);
         if (inRange) {
-            return !Physics2D.Raycast((Vector2) transform.position + projectileEmission,
-                (Vector2) (inRange.transform.position - transform.position) + projectileEmission, range, groundLayer);
+            Vector2 dir = inRange.transform.position + new Vector3(0, 0.25f) -
+                          (transform.position + (Vector3)projectileEmission);
+
+            return !Physics2D.Raycast((Vector2)transform.position + projectileEmission, dir, dir.magnitude, groundLayer);
         }
         return false;
     }

@@ -65,8 +65,10 @@ public class TrapGolem : MonoBehaviour {
     bool IsPlayerInRange() {
         Collider2D inRange = Physics2D.OverlapCircle((Vector2) transform.position + projectileEmissionCenter, range, playerLayer);
         if (inRange) {
-            return !Physics2D.Raycast((Vector2)transform.position + projectileEmissionCenter,
-                inRange.transform.position + new Vector3(0, 0.25f) - (transform.position + (Vector3) projectileEmissionCenter), range, groundLayer);
+            Vector2 dir = inRange.transform.position + new Vector3(0, 0.25f) -
+                          (transform.position + (Vector3) projectileEmissionCenter);
+
+            return !Physics2D.Raycast((Vector2)transform.position + projectileEmissionCenter, dir, dir.magnitude, groundLayer);
         }
         return false;
     }
