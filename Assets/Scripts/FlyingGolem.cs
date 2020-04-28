@@ -88,8 +88,10 @@ public class FlyingGolem : MonoBehaviour {
     bool IsPlayerInRange() {
         Collider2D inRange = Physics2D.OverlapCircle(transform.position + new Vector3(0, 0.25f), range, playerLayer);
         if (inRange) {
-            return !Physics2D.Raycast(transform.position + new Vector3(0, 0.25f),
-                (inRange.transform.position + new Vector3(0, 0.1f)) - (transform.position + new Vector3(0, 0.25f)), range, groundLayer);
+            Vector2 dir = inRange.transform.position + new Vector3(0, 0.25f) -
+                          (transform.position + new Vector3(0, 0.25f));
+
+            return !Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0.25f), dir, dir.magnitude, groundLayer);
         }
         return false;
     }
