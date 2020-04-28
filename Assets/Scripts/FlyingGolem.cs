@@ -11,8 +11,8 @@ public class FlyingGolem : MonoBehaviour {
     [SerializeField] private float accelerationTime = 0.5f;
     [SerializeField] private float playerKnockbackForce;
     [SerializeField] private GameObject deathParticle;
-    [SerializeField] private float rayLength = 0.25f;
     [SerializeField] private SpriteRenderer bodySr;
+    [SerializeField] private Transform rayOrigin;
 
     private Animator animator;
     private MaterialPropertyBlock propertyBlock;
@@ -56,14 +56,14 @@ public class FlyingGolem : MonoBehaviour {
             velocity = Vector2.SmoothDamp(velocity, targetVelocity, ref velocitySmoothing, accelerationTime);
 
             // Check for ground collision
-            RaycastHit2D hitGround = Physics2D.Raycast(transform.position, velocity, velocity.magnitude * Time.deltaTime + rayLength, groundLayer);
+            RaycastHit2D hitGround = Physics2D.Raycast(rayOrigin.position, velocity, velocity.magnitude * Time.deltaTime, groundLayer);
             if (hitGround) {
                 Debug.Log("Ground!");
                 Kill();
             }
 
             // Check for ground collision
-            RaycastHit2D hitPlayer = Physics2D.Raycast(transform.position, velocity, velocity.magnitude * Time.deltaTime + rayLength, playerLayer);
+            RaycastHit2D hitPlayer = Physics2D.Raycast(rayOrigin.position, velocity, velocity.magnitude * Time.deltaTime, playerLayer);
             if (hitPlayer) {
                 player.Damage();
                 player.Knockback(direction.normalized * playerKnockbackForce);
@@ -99,7 +99,5 @@ public class FlyingGolem : MonoBehaviour {
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, range);
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position - new Vector3(0, rayLength));
     }
 }

@@ -29365,7 +29365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteObject: {fileID: 1335410315066323426}
   spriteScaleObject: {fileID: 3229219677208927790}
-  maxHealth: 3
+  maxHealth: 4
   handTargetContainer: {fileID: 2086463337}
   leftHand: {fileID: 0}
   leftHandTarget: {fileID: 590114213}

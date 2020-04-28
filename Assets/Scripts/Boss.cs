@@ -17,6 +17,7 @@ public class Boss : MonoBehaviour {
     [SerializeField] private GameObject rollingGolemPrefab;
     [SerializeField] private float rollingGolemCooldown = 6f;
     [SerializeField] private List<Transform> rollingGolemSpawnPoints;
+    [SerializeField] private float summonRadius = 20f;
 
     [Header("Hitting")]
     [SerializeField] private Vector2 hitKnockback;
@@ -64,10 +65,10 @@ public class Boss : MonoBehaviour {
         if (IsPlayerInRange() && !hitting && !summoningFlying && !summoningRolling && hitTime + hitCooldown <= Time.time) {
             hitting = true;
             animator.SetTrigger("hit");
-        } else if (!hitting && !summoningFlying && !summoningRolling && flyingTime + flyingGolemCooldown <= Time.time) {
+        } else if (IsPlayerInSummonRange() && !hitting && !summoningFlying && !summoningRolling && flyingTime + flyingGolemCooldown <= Time.time) {
             summoningFlying = true;
             animator.SetTrigger("summon");
-        } else if (!hitting && !summoningFlying && !summoningRolling && rollingTime + rollingGolemCooldown <= Time.time) {
+        } else if (IsPlayerInSummonRange() && !hitting && !summoningFlying && !summoningRolling && rollingTime + rollingGolemCooldown <= Time.time) {
             summoningRolling = true;
             animator.SetTrigger("summon");
         }
@@ -75,6 +76,10 @@ public class Boss : MonoBehaviour {
 
     bool IsPlayerInRange() {
         return Physics2D.OverlapCircle((Vector2) transform.position + hitCenter, hitRange, playerLayer);
+    }
+
+    bool IsPlayerInSummonRange() {
+        return Physics2D.OverlapCircle((Vector2)transform.position + hitCenter, summonRadius, playerLayer);
     }
 
     void HitFinished() {

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1509064603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1509064604}
+  m_Layer: 0
+  m_Name: Ray origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1509064604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509064603}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.753, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7853398271502121363}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7027619967669929068
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,7 +98,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2074170617
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1679610714441270430, guid: 252639f9c0dc4d5439287f81ae22a19b,
     type: 3}
@@ -222,7 +252,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2074170617
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -5137052845164950675, guid: 252639f9c0dc4d5439287f81ae22a19b,
     type: 3}
@@ -268,6 +298,7 @@ Transform:
   - {fileID: 7027619967669929071}
   - {fileID: 7853398270265353701}
   - {fileID: 7853398269721610230}
+  - {fileID: 1509064604}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -296,8 +327,8 @@ MonoBehaviour:
   playerKnockbackForce: 0
   deathParticle: {fileID: 2184147683968468234, guid: 9d8209d1b3e750843a493c6948f79c72,
     type: 3}
-  rayLength: 0.75
   bodySr: {fileID: 7853398270265353698}
+  rayOrigin: {fileID: 1509064604}
 --- !u!95 &7853398271502121364
 Animator:
   serializedVersion: 3

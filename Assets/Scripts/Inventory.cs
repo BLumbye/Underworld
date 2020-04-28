@@ -33,6 +33,8 @@ public class Inventory : MonoBehaviour {
     public TextMeshProUGUI signTextUI;
     public RectTransform signCanvas;
 
+    private float camSize = 5.625f;
+
     private Regex inputRegex = new Regex(@"\$(.+)\$");
 
     void Awake() {
@@ -97,6 +99,13 @@ public class Inventory : MonoBehaviour {
     public void OnJumpInput(InputAction.CallbackContext ctx) {
         if (ctx.performed && ctx.ReadValue<float>() <= 0.5f && paused) {
             StartCoroutine(Unpause());
+        }
+    }
+
+    public void ChangeCameraSize(float newSize) {
+        if (camSize != newSize) {
+            camSize = newSize;
+            Camera.main.DOOrthoSize(newSize, 0.5f).SetEase(Ease.InOutCubic);
         }
     }
 
