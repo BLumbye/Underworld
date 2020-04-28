@@ -50,7 +50,6 @@ public class FlyingGolem : MonoBehaviour {
         } else if (playerInRange && preparingDash) {
             // Set direction
             direction = (player.transform.position - new Vector3(0, 0.2f)) - transform.position;
-            Debug.Log(Vector2.SignedAngle(Vector2.right, direction));
             transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.down, direction));
         } else if (dashing) {
             Vector2 targetVelocity = direction.normalized * speed;
