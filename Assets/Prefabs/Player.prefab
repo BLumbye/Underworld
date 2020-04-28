@@ -47,9 +47,9 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.95
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.2
+  m_Intensity: 0.4
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 000000007b4e6789b96ac02533d04221fd507e2ff954a17b9b2f0424a9af294c4bc31abe
+  m_ApplyToSortingLayers: 000000007b4e6789b96ac025f954a17b33d04221d7526095fd507e2f9b2f0424a9af294c4bc31abe454525f1
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 1
   m_LightOrder: 0
@@ -4810,7 +4810,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 604254107
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -9631,7 +9631,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 604254107
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -14512,7 +14512,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 604254107
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -19275,7 +19275,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 604254107
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -24087,7 +24087,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 604254107
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: -1
   m_RenderMode: 0
   m_SortMode: 0
@@ -28908,7 +28908,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 604254107
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -29034,7 +29034,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 796807421
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -6251906239372539920, guid: f372bf9db98dea941b3f073f56f95ab3,
     type: 3}
@@ -29434,6 +29434,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5ee3157431ca35b4e96720ae6ccdcd30, type: 2}
   - {fileID: 11400000, guid: 69a6723b155e1b74fbb902e07f00130b, type: 2}
   - {fileID: 11400000, guid: a775c5ff125672546a7b4484ead9e666, type: 2}
+  relicShowcase: {fileID: 0}
+  relicIcon: {fileID: 0}
+  relicName: {fileID: 0}
+  relicDescription: {fileID: 0}
+  relicContinue: {fileID: 0}
+  paused: 0
+  signText: 
+  signPosition: {x: 0, y: 0}
+  signTextUI: {fileID: 0}
+  signCanvas: {fileID: 0}
 --- !u!114 &172613310
 MonoBehaviour:
   m_ObjectHideFlags: 0
