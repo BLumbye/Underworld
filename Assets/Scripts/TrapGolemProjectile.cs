@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class TrapGolemProjectile : MonoBehaviour {
     [Header("Settings")]
-    [SerializeField] private float speed;
+    [SerializeField] public float speed;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private string inactiveSortingLayerName = "ProjectilesInactive";

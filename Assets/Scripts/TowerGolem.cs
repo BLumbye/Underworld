@@ -8,6 +8,7 @@ public class TowerGolem : MonoBehaviour {
     [SerializeField] private float shootCooldown = 1f;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Vector2 projectileEmission = new Vector2(0, 0.25f);
+    [SerializeField] private float projectileSpeed = 12f;
     [ColorUsage(true, true)]
     [SerializeField] private Color emissionColor;
     [SerializeField] private GameObject deathParticle;
@@ -47,7 +48,10 @@ public class TowerGolem : MonoBehaviour {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Vector2 direction = (player.transform.position + new Vector3(0, 0.5f)) - (transform.position + (Vector3) projectileEmission);
         float angle = Vector2.SignedAngle(Vector2.right, direction);
-        Instantiate(projectilePrefab, transform.position + (Vector3) projectileEmission, Quaternion.Euler(0, 0, angle));
+        TrapGolemProjectile projectile =
+            Instantiate(projectilePrefab, transform.position + (Vector3) projectileEmission,
+                Quaternion.Euler(0, 0, angle)).GetComponent<TrapGolemProjectile>();
+        projectile.speed = projectileSpeed;
     }
 
     bool IsPlayerInRange() {
@@ -59,7 +63,7 @@ public class TowerGolem : MonoBehaviour {
         return false;
     }
 
-    void Kill() {
+    public void Kill() {
         Instantiate(deathParticle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
