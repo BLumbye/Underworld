@@ -328,7 +328,6 @@ public class Player : MonoBehaviour {
             jumpParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
             wallSlideParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
             wallClimbParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
-            wallJumpParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
             dashParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
             dashGhostParticle.transform.localScale = new Vector3(controller.collisions.faceDir, 1);
             if (Math.Sign(wallSlideParticle.transform.localPosition.x) != controller.collisions.faceDir) {
@@ -342,6 +341,8 @@ public class Player : MonoBehaviour {
             if (controller.collisions.below)
                 PlayJumpParticle();
         }
+
+        wallJumpParticle.transform.localScale = new Vector3((wallSliding || wallGrabbing) ? wallDirX : coyoteWallDirX, 1);
     }
 
     void UpdateHands() {
@@ -674,7 +675,7 @@ public class Player : MonoBehaviour {
     }
 
     public void OnJumpInput(InputAction.CallbackContext ctx) {
-        if (!ctx.performed)
+        if (!ctx.performed || Inventory.Instance.paused)
             return;
 
         jumpPressed = ctx.ReadValue<float>() >= 0.5f;
@@ -683,28 +684,37 @@ public class Player : MonoBehaviour {
     }
 
     public void OnDashInput(InputAction.CallbackContext ctx) {
-        if (!ctx.performed)
+        if (!ctx.performed || Inventory.Instance.paused)
             return;
 
         Dash();
     }
 
     public void OnGrappleInput(InputAction.CallbackContext ctx) {
-        if (!ctx.performed)
+        if (!ctx.performed || Inventory.Instance.paused)
             return;
 
         Grapple();
     }
 
     public void OnDownInput(InputAction.CallbackContext ctx) {
+        if (Inventory.Instance.paused)
+            return;
+
         downPressed = ctx.ReadValue<float>() >= 0.5f;
     }
 
     public void OnWallClimbInput(InputAction.CallbackContext ctx) {
+        if (Inventory.Instance.paused)
+            return;
+
         wallClimbPressed = ctx.ReadValue<float>() >= 0.25f;
     }
 
     public void SetDirectionalInput(InputAction.CallbackContext ctx) {
+        if (Inventory.Instance.paused)
+            return;
+
         directionalInput = ctx.ReadValue<Vector2>();
     }
     #endregion

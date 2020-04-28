@@ -66,3 +66,6 @@ TagManager:
   - name: Foreground
     uniqueID: 3189424971
     locked: 0
+  - name: Relics
+    uniqueID: 4045751621
+    locked: 0

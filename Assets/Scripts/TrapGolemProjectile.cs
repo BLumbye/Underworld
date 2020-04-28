@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
 public class TrapGolemProjectile : MonoBehaviour {
     [Header("Settings")]
     [SerializeField] public float speed;

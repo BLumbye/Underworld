@@ -1,7 +1,49 @@
 fileFormatVersion: 2
 guid: 252639f9c0dc4d5439287f81ae22a19b
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -5137052845164950675
+    second: flying_golem_diffuse_body_0
+  - first:
+      213: 3108425572643926512
+    second: flying_golem_diffuse_body_1
+  - first:
+      213: 5504858662909185400
+    second: flying_golem_diffuse_body_2
+  - first:
+      213: -1278077549958665881
+    second: flying_golem_diffuse_body_3
+  - first:
+      213: -6355680987254828890
+    second: flying_golem_diffuse_body_4
+  - first:
+      213: -6134652298484527517
+    second: flying_golem_diffuse_body_5
+  - first:
+      213: -862118656350866653
+    second: flying_golem_diffuse_body_6
+  - first:
+      213: -1679610714441270430
+    second: flying_golem_diffuse_head_0
+  - first:
+      213: -2759793602493390753
+    second: flying_golem_diffuse_head_1
+  - first:
+      213: -3434506826093267886
+    second: flying_golem_diffuse_head_2
+  - first:
+      213: 5882800050280474418
+    second: flying_golem_diffuse_head_3
+  - first:
+      213: 3239274642650979148
+    second: flying_golem_diffuse_head_4
+  - first:
+      213: 2662627277015408702
+    second: flying_golem_diffuse_head_5
+  - first:
+      213: -3293067834173909289
+    second: flying_golem_diffuse_head_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -40,7 +82,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -109,7 +151,301 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: flying_golem_diffuse_body_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 7
+        height: 12
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b888397a585b8b0800000000000000
+      internalID: -5137052845164950675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_body_1
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 0
+        width: 7
+        height: 12
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f17e24d698532b20800000000000000
+      internalID: 3108425572643926512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_body_2
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 0
+        width: 7
+        height: 12
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87d0f65b9cf256c40800000000000000
+      internalID: 5504858662909185400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_body_3
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 0
+        width: 7
+        height: 12
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 769ef476d3b534ee0800000000000000
+      internalID: -1278077549958665881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_body_4
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 0
+        width: 7
+        height: 12
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a0d8f0e0d51cc7a0800000000000000
+      internalID: -6355680987254828890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_body_5
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 0
+        width: 7
+        height: 12
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36ecb40cc365ddaa0800000000000000
+      internalID: -6134652298484527517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_body_6
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 0
+        width: 7
+        height: 12
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32338f556a32904f0800000000000000
+      internalID: -862118656350866653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_head_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 14
+        width: 4
+        height: 7
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26bb9c444f2d0b8e0800000000000000
+      internalID: -1679610714441270430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_head_1
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 14
+        width: 4
+        height: 7
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f506cfd275e33b9d0800000000000000
+      internalID: -2759793602493390753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_head_2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 14
+        width: 4
+        height: 7
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2547e0c0d3e2650d0800000000000000
+      internalID: -3434506826093267886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_head_3
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 14
+        width: 4
+        height: 7
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2372e913a77e3a150800000000000000
+      internalID: 5882800050280474418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_head_4
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 14
+        width: 4
+        height: 7
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4b5425002734fc20800000000000000
+      internalID: 3239274642650979148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_head_5
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 14
+        width: 4
+        height: 7
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e30e4c7b66d83f420800000000000000
+      internalID: 2662627277015408702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flying_golem_diffuse_head_6
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 14
+        width: 4
+        height: 7
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d69cc2904cac42d0800000000000000
+      internalID: -3293067834173909289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +455,11 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: 7b550020c1d39f447aa8b5f8e199578a, type: 3}
+      name: _NormalMap
+    - texture: {fileID: 2800000, guid: 7de10e9b32d47b34bb63f0972a01d7da, type: 3}
+      name: _Emission
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
