@@ -48,11 +48,14 @@ TagManager:
   - name: ProjectilesInactive
     uniqueID: 633367225
     locked: 0
+  - name: Enemies
+    uniqueID: 2074170617
+    locked: 0
   - name: Tiles
     uniqueID: 558026803
     locked: 0
-  - name: Enemies
-    uniqueID: 2074170617
+  - name: Boss
+    uniqueID: 2506117847
     locked: 0
   - name: Player
     uniqueID: 796807421
