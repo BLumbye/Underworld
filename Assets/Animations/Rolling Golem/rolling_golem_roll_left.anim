@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: rolling_golem_roll
+  m_Name: rolling_golem_roll_left
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
