@@ -11,12 +11,6 @@ TextureImporter:
   - first:
       213: -2956382079364231701
     second: bg_2
-  - first:
-      213: 5428140402264584069
-    second: bg_1
-  - first:
-      213: -7816201413775925950
-    second: bg_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -76,7 +70,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -88,7 +82,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -161,8 +155,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58f2de3bfe0a45b40800000000000000
-      internalID: 5428140402264584069
+      spriteID: 243ba75661d73e970800000000000000
+      internalID: 8783001233447891778
       vertices: []
       indices: 
       edges: []
@@ -182,8 +176,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24ddaf6e936478390800000000000000
-      internalID: -7816201413775925950
+      spriteID: bed0a239922d8f6d0800000000000000
+      internalID: -2956382079364231701
       vertices: []
       indices: 
       edges: []
