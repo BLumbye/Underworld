@@ -26,13 +26,13 @@ public class TowerGolem : MonoBehaviour {
         propertyBlock = new MaterialPropertyBlock();
         sr.GetPropertyBlock(propertyBlock);
         propertyBlock.SetColor("_EmissionColor", emissionColor);
-        GetComponent<SpriteRenderer>().SetPropertyBlock(propertyBlock);
+        sr.SetPropertyBlock(propertyBlock);
     }
 
     void Update() {
         if (emissionColor != propertyBlock.GetColor("_EmissionColor")) {
             propertyBlock.SetColor("_EmissionColor", emissionColor);
-            GetComponent<SpriteRenderer>().SetPropertyBlock(propertyBlock);
+            sr.SetPropertyBlock(propertyBlock);
         }
 
         bool playerInRange = IsPlayerInRange();

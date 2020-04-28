@@ -255,17 +255,6 @@
                 },
                 {
                     "name": "",
-                    "id": "7db2fef3-54a1-4441-b928-ba2692d14249",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "5a0b4da2-96d3-4251-adc7-84576d1cc2ba",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",

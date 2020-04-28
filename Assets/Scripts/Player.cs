@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
-using Boo.Lang;
-using Cinemachine;
+using System.Collections.Generic;
 using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
@@ -121,7 +120,7 @@ public class Player : MonoBehaviour {
 
     #region Movement
     private Vector2 velocity;
-    private float gravity;
+    public float gravity { private set; get; }
     private float maxJumpVelocity;
     private float minJumpVelocity;
     private Vector2 velocitySmoothing;
@@ -610,7 +609,7 @@ public class Player : MonoBehaviour {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        camera.trauma += 0.3f;
+        camera.trauma += 0.35f;
         UpdateHearts();
         StartCoroutine(DamageAnimation());
     }
@@ -621,6 +620,11 @@ public class Player : MonoBehaviour {
         yield return new WaitForSeconds(0.175f);
         DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, defaultVignetteIntensity, 1f).SetEase(Ease.OutCubic);
         DOTween.To(() => vignette.color.value, x => vignette.color.value = x, defaultVignetteColor, 1f).SetEase(Ease.OutCubic);
+    }
+
+    public void Knockback(Vector2 knockback) {
+        velocity += knockback;
+        camera.trauma += knockback.magnitude / 200;
     }
 
     public void UpdateHearts() {

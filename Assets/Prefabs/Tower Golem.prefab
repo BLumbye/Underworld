@@ -129,6 +129,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4022169226348342807, guid: d5ec51813b7fb4d4c81c3d62bcc387a0,
     type: 3}
   projectileEmission: {x: 0, y: 2.065}
+  projectileSpeed: 13
   emissionColor: {r: 0.07058824, g: 0.7490196, b: 0.7490196, a: 1}
   deathParticle: {fileID: 2184147683968468234, guid: 9d8209d1b3e750843a493c6948f79c72,
     type: 3}
@@ -192,7 +193,7 @@ Animator:
   m_GameObject: {fileID: 1196899153906284599}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ac507e2ffc68c19478b00fbf6ab5ae6a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 131b69fa71757c64ab6b0f8048278efc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

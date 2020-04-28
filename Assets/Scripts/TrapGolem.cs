@@ -28,12 +28,13 @@ public class TrapGolem : MonoBehaviour {
         propertyBlock = new MaterialPropertyBlock();
         sr.GetPropertyBlock(propertyBlock);
         propertyBlock.SetColor("_EmissionColor", emissionColor);
-        GetComponent<SpriteRenderer>().SetPropertyBlock(propertyBlock);
+        sr.SetPropertyBlock(propertyBlock);
     }
 
     void Update() {
         if (emissionColor != propertyBlock.GetColor("_EmissionColor")) {
             propertyBlock.SetColor("_EmissionColor", emissionColor);
+            sr.SetPropertyBlock(propertyBlock);
         }
 
         bool playerInRange = IsPlayerInRange();
@@ -72,7 +73,7 @@ public class TrapGolem : MonoBehaviour {
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(transform.position + (Vector3) projectileEmissionCenter, range);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + (Vector3)projectileEmissionCenter, projectileEmissionRadius);
     }

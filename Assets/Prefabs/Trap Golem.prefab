@@ -50,6 +50,9 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
   projectilePrefab: {fileID: 4022169226348342807, guid: f9ee69c8208f99141a0eba44c68f8a46,
     type: 3}
   projectileEmissionRadius: 0.75
