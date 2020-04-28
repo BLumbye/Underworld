@@ -256,18 +256,7 @@
                 {
                     "name": "",
                     "id": "5a0b4da2-96d3-4251-adc7-84576d1cc2ba",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1d63caaf-ba38-42ad-bf52-4c16ec80d318",
-                    "path": "<Keyboard>/rightShift",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",

@@ -78,7 +78,6 @@ public class RollingGolem : MonoBehaviour {
             if (controller.collisions.above || controller.collisions.below)
                 velocity.y = 0;
 
-            //Debug.Log(controller.collisions.faceDir);
             if (rollingDir == 1 && controller.collisions.right ||
                 rollingDir == -1 && controller.collisions.left) {
                 velocity.x = 0;
