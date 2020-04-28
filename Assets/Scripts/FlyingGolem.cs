@@ -59,6 +59,7 @@ public class FlyingGolem : MonoBehaviour {
             // Check for ground collision
             RaycastHit2D hitGround = Physics2D.Raycast(transform.position, velocity, velocity.magnitude * Time.deltaTime + rayLength, groundLayer);
             if (hitGround) {
+                Debug.Log("Ground!");
                 Kill();
             }
 

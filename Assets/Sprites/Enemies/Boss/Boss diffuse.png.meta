@@ -1,73 +1,67 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: c9a3668ae384e374d89eaba374865b27
-TextureImporter:
-  internalIDToNameTable: []
-=======
-guid: b6fc96fc4be5c5c42adcc020a10b39b7
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: -2411683604029071431
-    second: Boss diffuse idle 0
+    second: Boss diffuse_0
   - first:
       213: 9208063860873889744
-    second: Boss diffuse idle 1
+    second: Boss diffuse_1
   - first:
       213: -231358508276232360
-    second: Boss diffuse idle 2
+    second: Boss diffuse_2
   - first:
       213: -467567967010131328
-    second: Boss diffuse idle 3
+    second: Boss diffuse_3
   - first:
       213: 737137745455373407
-    second: Boss diffuse attack 0
+    second: Boss diffuse_4
   - first:
       213: -331755154847994441
-    second: Boss diffuse attack 1
+    second: Boss diffuse_5
   - first:
       213: -6822652311083248386
-    second: Boss diffuse attack 2
+    second: Boss diffuse_6
   - first:
       213: 7992529347472923961
-    second: Boss diffuse attack 3
+    second: Boss diffuse_7
   - first:
       213: -4139179755520344612
-    second: Boss diffuse attack 4
+    second: Boss diffuse_8
   - first:
       213: 4119843389419007707
-    second: Boss diffuse attack 5
+    second: Boss diffuse_9
   - first:
       213: 4179625644495335464
-    second: Boss diffuse attack 6
+    second: Boss diffuse_10
   - first:
       213: 498970689835971407
-    second: Boss diffuse summon 0
+    second: Boss diffuse_11
   - first:
       213: -6151428234825793397
-    second: Boss diffuse summon 1
+    second: Boss diffuse_12
   - first:
       213: -7356095511801705861
-    second: Boss diffuse summon 2
+    second: Boss diffuse_13
   - first:
       213: -3840558266176238966
-    second: Boss diffuse summon 3
+    second: Boss diffuse_14
   - first:
       213: 2249812610878956055
-    second: Boss diffuse summon 4
+    second: Boss diffuse_15
   - first:
       213: -3327453324912276815
-    second: Boss diffuse summon 5
+    second: Boss diffuse_16
   - first:
       213: -8567912798690258682
-    second: Boss diffuse stunned 0
+    second: Boss diffuse_17
   - first:
       213: -6519305439982712882
-    second: Boss diffuse stunned 1
+    second: Boss diffuse_18
   - first:
       213: 2469967182312578132
-    second: Boss diffuse stunned 2
->>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
+    second: Boss diffuse_19
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -102,19 +96,11 @@ TextureImporter:
     mipBias: -100
     wrapU: 1
     wrapV: 1
-<<<<<<< HEAD
     wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
-=======
-    wrapW: -1
-  nPOTScale: 0
-  lightmap: 0
-  compressionQuality: 50
   spriteMode: 2
->>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -157,7 +143,6 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-<<<<<<< HEAD
   - serializedVersion: 3
     buildTarget: iPhone
     maxTextureSize: 2048
@@ -184,13 +169,9 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
-=======
-  spriteSheet:
-    serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boss diffuse idle 0
+      name: Boss diffuse_0
       rect:
         serializedVersion: 2
         x: 0
@@ -211,7 +192,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse idle 1
+      name: Boss diffuse_1
       rect:
         serializedVersion: 2
         x: 69
@@ -232,7 +213,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse idle 2
+      name: Boss diffuse_2
       rect:
         serializedVersion: 2
         x: 138
@@ -253,7 +234,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse idle 3
+      name: Boss diffuse_3
       rect:
         serializedVersion: 2
         x: 207
@@ -274,7 +255,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse attack 0
+      name: Boss diffuse_4
       rect:
         serializedVersion: 2
         x: 0
@@ -295,7 +276,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse attack 1
+      name: Boss diffuse_5
       rect:
         serializedVersion: 2
         x: 69
@@ -316,7 +297,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse attack 2
+      name: Boss diffuse_6
       rect:
         serializedVersion: 2
         x: 138
@@ -337,7 +318,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse attack 3
+      name: Boss diffuse_7
       rect:
         serializedVersion: 2
         x: 207
@@ -358,7 +339,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse attack 4
+      name: Boss diffuse_8
       rect:
         serializedVersion: 2
         x: 276
@@ -379,7 +360,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse attack 5
+      name: Boss diffuse_9
       rect:
         serializedVersion: 2
         x: 345
@@ -400,7 +381,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse attack 6
+      name: Boss diffuse_10
       rect:
         serializedVersion: 2
         x: 414
@@ -421,7 +402,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse summon 0
+      name: Boss diffuse_11
       rect:
         serializedVersion: 2
         x: 0
@@ -442,7 +423,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse summon 1
+      name: Boss diffuse_12
       rect:
         serializedVersion: 2
         x: 69
@@ -463,7 +444,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse summon 2
+      name: Boss diffuse_13
       rect:
         serializedVersion: 2
         x: 138
@@ -484,7 +465,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse summon 3
+      name: Boss diffuse_14
       rect:
         serializedVersion: 2
         x: 207
@@ -505,7 +486,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse summon 4
+      name: Boss diffuse_15
       rect:
         serializedVersion: 2
         x: 276
@@ -526,7 +507,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse summon 5
+      name: Boss diffuse_16
       rect:
         serializedVersion: 2
         x: 345
@@ -547,7 +528,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse stunned 0
+      name: Boss diffuse_17
       rect:
         serializedVersion: 2
         x: 0
@@ -568,7 +549,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse stunned 1
+      name: Boss diffuse_18
       rect:
         serializedVersion: 2
         x: 69
@@ -589,7 +570,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss diffuse stunned 2
+      name: Boss diffuse_19
       rect:
         serializedVersion: 2
         x: 138
@@ -609,7 +590,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
->>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
     outline: []
     physicsShape: []
     bones: []
@@ -619,15 +599,11 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-<<<<<<< HEAD
-    secondaryTextures: []
-=======
     secondaryTextures:
     - texture: {fileID: 2800000, guid: 70adf515b3388ff43bf2e0c060125a18, type: 3}
       name: _NormalMap
     - texture: {fileID: 2800000, guid: f9db1c2b838748245a94722ba4c9146a, type: 3}
       name: _Emission
->>>>>>> d270d8440b180ba9c1f4eeaeb34cf21e9dc0a0be
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

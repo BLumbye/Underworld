@@ -509,6 +509,8 @@ public class Player : MonoBehaviour {
 
             if (grappleExtendProgess < 1) {
                 grappleExtendProgess += Time.deltaTime / shootTime;
+                if (grappleExtendProgess > 1)
+                    grappleExtendProgess = 1;
                 grappleLine.SetPositions(new Vector3[] {
                     grappleOrigin, grappleOrigin + (currentGrapplePoint.position - grappleOrigin) * grappleExtendProgess
                 });
