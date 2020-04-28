@@ -222,6 +222,9 @@ public class Player : MonoBehaviour {
         HandleDashing();
         HandleGrappling();
 
+        // If paused stop velocity
+        if (Inventory.Instance.paused) directionalInput = Vector2.zero;
+
         // Jump from the jump buffer
         if (jumpPressedTime + jumpBufferTime > Time.time && controller.collisions.below) {
             Jump();
