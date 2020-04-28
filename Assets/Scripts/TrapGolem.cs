@@ -10,6 +10,7 @@ public class TrapGolem : MonoBehaviour {
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float projectileEmissionRadius = 0.5f;
     [SerializeField] private Vector2 projectileEmissionCenter = new Vector2(0, 0.25f);
+    [SerializeField] private float projectileSpeed = 12f;
     [SerializeField] private int projectileCount = 5;
     [ColorUsage(true, true)]
     [SerializeField] private Color emissionColor;
@@ -51,7 +52,8 @@ public class TrapGolem : MonoBehaviour {
         for (int i = 0; i < projectileCount; i++) {
             float angle = i * angleDifference;
             Vector3 position = transform.position + (Vector3) projectileEmissionCenter + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * projectileEmissionRadius;
-            Instantiate(projectilePrefab, position, Quaternion.Euler(0, 0, angle));
+            TrapGolemProjectile projectile = Instantiate(projectilePrefab, position, Quaternion.Euler(0, 0, angle)).GetComponent<TrapGolemProjectile>();
+            projectile.speed = projectileSpeed;
         }
 
         Instantiate(deathParticle, transform.position, Quaternion.identity);

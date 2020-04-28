@@ -28,6 +28,11 @@ public class Inventory : MonoBehaviour {
     private PlayerInput playerInput;
     private string relicContinueDefault;
 
+    [HideInInspector] public string signText = "";
+    [HideInInspector] public Vector2 signPosition;
+    public TextMeshProUGUI signTextUI;
+    public RectTransform signCanvas;
+
     private Regex inputRegex = new Regex(@"\$(.+)\$");
 
     void Awake() {
@@ -41,6 +46,19 @@ public class Inventory : MonoBehaviour {
     void Start() {
         playerInput = GetComponent<PlayerInput>();
         relicContinueDefault = relicContinue.text;
+    }
+
+    void LateUpdate() {
+        if (signText != "") {
+            signCanvas.gameObject.SetActive(true);
+            signTextUI.text = signText;
+            signCanvas.position = signPosition + Vector2.up * 2.5f;
+
+            signText = "";
+            signPosition = Vector2.zero;
+        } else {
+            signCanvas.gameObject.SetActive(false);
+        }
     }
 
     public Relic GetRelic(string name) {

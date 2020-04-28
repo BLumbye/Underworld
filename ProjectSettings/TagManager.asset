@@ -51,11 +51,11 @@ TagManager:
   - name: Tiles
     uniqueID: 558026803
     locked: 0
-  - name: Player
-    uniqueID: 796807421
-    locked: 0
   - name: Enemies
     uniqueID: 2074170617
+    locked: 0
+  - name: Player
+    uniqueID: 796807421
     locked: 0
   - name: Particles
     uniqueID: 604254107
