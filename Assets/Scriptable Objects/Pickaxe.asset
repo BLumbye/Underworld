@@ -16,4 +16,4 @@ MonoBehaviour:
   description: With the pickaxe you can glide down walls slowly and leap away from
     them. $Jump$ while on a wall to wall jump.
   icon: {fileID: 21300000, guid: f6ff1f7a67e34414ca8aff854357a8e2, type: 3}
-  owned: 1
+  owned: 0
