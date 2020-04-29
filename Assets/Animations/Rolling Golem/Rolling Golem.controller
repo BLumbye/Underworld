@@ -47,19 +47,19 @@ AnimatorStateMachine:
     m_Position: {x: 370, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 32567356035461429}
-    m_Position: {x: 570, y: -260, z: 0}
+    m_Position: {x: 150, y: -220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -62976164630072380}
     m_Position: {x: 370, y: -170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3716950392932570886}
-    m_Position: {x: 370, y: -350, z: 0}
+    m_Position: {x: 370, y: -270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4455855204549539638}
     m_Position: {x: 30, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7669607420291167815}
-    m_Position: {x: 570, y: -210, z: 0}
+    m_Position: {x: 590, y: -220, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -4526242897690168887}
@@ -341,31 +341,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: roll
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: stun
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: die
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: right
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base

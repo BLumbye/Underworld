@@ -30,14 +30,13 @@ public class CameraController : MonoBehaviour {
     public float maxAngle;
     public float speedScale;
 
-
     private new Camera camera;
     private Vector2 velocity = Vector2.zero;
     private Vector2 position;
 
     #region Screenshake variables
     private Vector2 shakeOffset = Vector2.zero;
-    public float trauma;
+    [HideInInspector] public float trauma;
     #endregion
 
     void Start() {
