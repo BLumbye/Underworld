@@ -16,4 +16,4 @@ MonoBehaviour:
   description: With the pickaxe sharpened you can now climb up and down walls. $Wall
     grab$ to grab onto walls.
   icon: {fileID: 21300000, guid: 1ce603b10b498a644b8c5dfcbd61a607, type: 3}
-  owned: 1
+  owned: 0

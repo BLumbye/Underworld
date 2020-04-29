@@ -16,4 +16,4 @@ MonoBehaviour:
   description: With the upgrade to your rocket boots you can now dash. $Dash$ to
     use.
   icon: {fileID: 21300000, guid: 4333daec296a486418b83ef772f17aba, type: 3}
-  owned: 1
+  owned: 0

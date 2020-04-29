@@ -16,4 +16,4 @@ MonoBehaviour:
   description: The grappling hook allows you to hook on to targets. When a taret
     is active $Grapple$ to hook to it.
   icon: {fileID: 21300000, guid: 3c35efcad702e19438a2bd1d13893f79, type: 3}
-  owned: 1
+  owned: 0
